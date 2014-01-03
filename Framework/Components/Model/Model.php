@@ -2,6 +2,7 @@
 
 namespace Framework\Components\Model;
 use Framework\Components\Model\Exceptions\UnknownPropertyException;
+use Framework\Components\Model\Exceptions\MissingTableNameException;
 use Framework\Components\Database\Database;
 
 defined('CORE_EXEC') or die('Restricted Access');
@@ -99,6 +100,9 @@ abstract class Model {
 	 *
 	 */
 	public static function all () {
+		if (!defined('static::TABLE_NAME')) {
+			throw new MissingTableNameException();
+		}		
 		return Database::select_all(static::TABLE_NAME);
 	}
 
@@ -111,6 +115,9 @@ abstract class Model {
 	 *
 	 */
 	public static function create ($inputs=array()) {
+		if (!defined('static::TABLE_NAME')) {
+			throw new MissingTableNameException();
+		}		
 		$id = Database::insert(static::TABLE_NAME, (array)$inputs);
 		return Database::select_id(static::TABLE_NAME, $id);
 	}
@@ -126,9 +133,14 @@ abstract class Model {
 	 *
 	 */	
 	public static function find ($id_or_array) {
-		if (is_array($id_or_array)) 
+		if (!defined('static::TABLE_NAME')) {
+			throw new MissingTableNameException();
+		}
+		if (is_array($id_or_array)) {
 			return Database::select_where(static::TABLE_NAME, $id_or_array);
-		return Database::select_id(static::TABLE_NAME, $id_or_array);
+		} else {
+			return Database::select_id(static::TABLE_NAME, $id_or_array);
+		}
 	}
 
 
@@ -141,6 +153,9 @@ abstract class Model {
 	 *
 	 */
 	public static function delete ($id) {
+		if (!defined('static::TABLE_NAME')) {
+			throw new MissingTableNameException();
+		}		
 		$model = Database::select_id(static::TABLE_NAME, $id);
 		Database::delete_id(static::TABLE_NAME, $id);
 		return $model;
@@ -157,6 +172,9 @@ abstract class Model {
 	 *
 	 */
 	public static function update ($id, $inputs=array()) {
+		if (!defined('static::TABLE_NAME')) {
+			throw new MissingTableNameException();
+		}		
 		Database::update_id(static::TABLE_NAME, $id, $inputs);
 		return Database::select_id(static::TABLE_NAME, $id);
 	}
