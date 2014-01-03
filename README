@@ -44,10 +44,7 @@ You can use the wild cards (:id) to pass parameters in the controller action
 => ProductsController::show($category_id, $product_id)
 
 
-2- Add the controller in App/Controllers folder. When creating a file on the framework, always make 
-sure to use all the needed namespace and put the right namespace of the file it self. Namespaces
-matches the directory architecture from the root. Also the add security on your file, make sure to add
-this line after the namespace declaration: 
+2- Add the controller in App/Controllers folder. When creating a file on the framework, always make sure to use all the needed namespace and put the right namespace of the file it self. Namespaces matches the directory architecture from the root. Also the add security on your file, make sure to add this line after the namespace declaration: 
 defined('CORE_EXEC') or die('Restriced Access');
 This line prevent loading independent file with passing by the index.php
 
@@ -62,8 +59,7 @@ This line prevent loading independent file with passing by the index.php
 
 When deploying the framework in production mode
 1- Set the ENVIRONMENT global in config.php to 'production'.
-2- REMOVE Migrations folder, because it contains all your database architecture and 
-all the routes of your framework, and you dont wnat that to be visible.
+2- REMOVE Migrations folder, because it contains all your database architecture and all the routes of your framework, and you dont wnat that to be visible.
 3- REMOVE .update-routes.php
 
 
@@ -89,18 +85,24 @@ So the view file that you a creating is only a partial from the app_template fil
 This extension pattern can also be used in your own partials
 example: new.xsl and edit.xsl are two partials that use the same form
 
-4- The content of the first child partial from the app_template is contain in the
-xsl:template that match the XML_PARTIAL_CONTAINER (as you can see in the empty.xsl file)
+4- The content of the first child partial from the app_template is contain in the xsl:template that match the XML_PARTIAL_CONTAINER (as you can see in the empty.xsl file)
 
-5- The App/Views/Templates/app_template.xsl file is the default template and container of your
-app. But there is nothing mandatory about this file and feel free to modify it. It is also where
-you will put all your CSS and JavaScript dependencies. The only IMPORTANT thing is that the
-content must go in the XML_PARTIAL_CONTAINER. 
-example: if you want to divise your app with an admin section, you could create a template file 
-call App/Views/Templates/admin_template.xsl and extends your views with that template.
+5- The App/Views/Templates/app_template.xsl file is the default template and container of your app. But there is nothing mandatory about this file and feel free to modify it. It is also where you will put all your CSS and JavaScript dependencies. The only IMPORTANT thing is that the content must go in the XML_PARTIAL_CONTAINER. 
+example: if you want to divise your app with an admin section, you could create a template file call App/Views/Templates/admin_template.xsl and extends your views with that template.
 
 
 
 
+------------------------------------------
+--- How to create a custom component ? ---
+------------------------------------------
+1- To add a component for your app, create a folder un App/Components/ with the name of your component.
 
+2- Add all the classes needed for this component and create an Exceptions/ folder to put all your exceptions triggers by the classes in this component.
+
+3- Do not add component in the Framework/Components/ because this folder is where the udpates are made, so they will get erase. It also assure the principle that the framework is independent from the App. 
+
+4- The principe of Component is that you can develop them and re-use them, if the Framework is always the same.
+
+example: The app comes with a default SecureController in the App/Components/ folder. You can inspire yourself with this component for creating your own.
 
