@@ -1,6 +1,7 @@
 <?php
 
 namespace Framework\Components\Session;
+use Framework\Components\Session\Exceptions\UnableToStartSessionException;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -38,6 +39,9 @@ class Session {
 	 *
 	 */
 	public static function start () {
+		if (headers_sent()) {
+			throw new UnableToStartSessionException();
+		}
 		session_start();
 	}
 
