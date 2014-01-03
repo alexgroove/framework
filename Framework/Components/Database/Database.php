@@ -59,7 +59,7 @@ class Database {
 				echo $e->getMessage();
 			}
 
-			// The registration is use to prevent a database connection to be open
+			// The registration is use to prevent a database connection to stay open
 			// when a script fail. It set the connection instance to null, ready
 			// for garbage collection.
 			register_shutdown_function(function () {

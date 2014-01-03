@@ -55,7 +55,7 @@ class Request {
 		}
 		$params = (isset($_GET['mvc'])) ? explode('/', rtrim($_GET['mvc'], '/')) : array('index');
 		foreach($params as $param) {
-			// Accumulate param when the value is numeric
+			// Accumulate params when the value is numeric
 			// Need to change that behavior to accept text parameter
 			if (is_numeric($param)) {
 				$this->params[] = $param;

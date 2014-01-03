@@ -68,3 +68,39 @@ all the routes of your framework, and you dont wnat that to be visible.
 
 
 
+
+######################################################################
+### FAQ
+######################################################################
+
+-------------------------------
+---  How to create a view ? --- 
+-------------------------------
+1- First create a folder link to your controller in App/Views/
+example: if you have a ProductsController, create App/Views/Products/ folder
+
+2- Map the name the controller method to the name of the view file
+example: ProductsController::show, create App/Views/Products/show.xsl file
+
+3- Copy and paste the basic empty template example xsl file in App/Views/Templates/empty.xsl
+Also feel free to create your own templates. 
+By default all views files are parent with the App/Views/Templates/app_template.xsl file. 
+So the view file that you a creating is only a partial from the app_template file. 
+This extension pattern can also be used in your own partials
+example: new.xsl and edit.xsl are two partials that use the same form
+
+4- The content of the first child partial from the app_template is contain in the
+xsl:template that match the XML_PARTIAL_CONTAINER (as you can see in the empty.xsl file)
+
+5- The App/Views/Templates/app_template.xsl file is the default template and container of your
+app. But there is nothing mandatory about this file and feel free to modify it. It is also where
+you will put all your CSS and JavaScript dependencies. The only IMPORTANT thing is that the
+content must go in the XML_PARTIAL_CONTAINER. 
+example: if you want to divise your app with an admin section, you could create a template file 
+call App/Views/Templates/admin_template.xsl and extends your views with that template.
+
+
+
+
+
+

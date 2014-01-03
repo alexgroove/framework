@@ -16,7 +16,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * This class represent a layer of abstraction over the database tables
  *
  * --- IMPORTANT ---
- * Each child must implement a constant TABLE_NAME 
+ * Each child must implement a constant TABLE_NAME, otherwise an Exception is thrown
  *
  * @author Alexandre Pagé
  *

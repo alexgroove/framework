@@ -52,7 +52,6 @@ Database::init();
 /**
  *
  * Start session with new user
- * Set privildege level for every new session
  *
  */
 Session::start();

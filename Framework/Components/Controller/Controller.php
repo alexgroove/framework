@@ -39,8 +39,7 @@ abstract class Controller  {
 	 * 
 	 * This method bind the class variable to a new View object
 	 * You can also set params for the view
-	 *
-	 * It also check if the right priviledge there to instanciate the controller
+	 * HTTP_LOCATION is a essential param for the view
 	 *
 	 */
 	public function __construct () { 

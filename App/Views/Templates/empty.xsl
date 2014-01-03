@@ -9,7 +9,7 @@
 <xsl:include href="../Templates/app_template.xsl"/>
 
 <xsl:template match="XML_PARTIAL_CONTAINER">
-	<xsl:copy-of select="."/>
+	<!-- Put your content here -->
 </xsl:template>
 
 </xsl:stylesheet>

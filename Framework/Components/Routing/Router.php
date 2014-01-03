@@ -15,7 +15,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * Class Router
  * 
  * This class is the front controller of the framework, it checks if the
- * request match a known routes and instanciate a new process with
+ * request match a known route and instanciate a new process with
  * the matched route and the request
  * 
  * @author Alexandre Pagé
