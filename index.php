@@ -1,7 +1,7 @@
 <?php
 
 /**
- *
+ * TEST
  * Core Framework
  * - index.php
  *
