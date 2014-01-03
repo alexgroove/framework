@@ -6,6 +6,22 @@
 ######################################################################
 ######################################################################
 
+
+
+######################################################################
+######################################################################
+	
+--- MANIFESTO ---
+ 
+This Framework wants to be a pure representation of the MVC pattern. It used PHP, MYSQL, XSLT and XML to reach his goal. For the PHP part, it implements to concept of namespaces and the PDO extension for accessing the Database. Informations is stock in MYSQL. For the View in MVC, the Framework use XSLT, separating completely the view from the logic. Every request is treat as a route by the front controller, the Router and then dispatch to a secondary controller that fetch the data using Model over the Database and pass them to the XSLT processor as XML data. The view then use XSL templates over the XML and render the view.
+
+
+######################################################################
+######################################################################
+
+
+
+
 Sections
 1. Installation
 2. Usage
@@ -29,11 +45,9 @@ Sections
 ### Usage
 ######################################################################
 
-The framework works like a router, every action is a predefined route. If you want
-to add routes, add them in Migrations/routes.sql, and run in your browser 
-http://localhost/.update-routes.php
+The framework works like a router, every action is a predefined route. If you want to add routes, add them in Migrations/routes.sql, and run in your browser http://localhost/.update-routes.php
 
-1- Adding a route: You need to know the HTTP method, the route parh, the controller name, the action name
+1- Adding a route: You need to know the HTTP method, the route path, the controller name, the action name
 examples:  
 GET about MainController about 
 GET products/:id ProductsController show
