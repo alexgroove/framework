@@ -1,0 +1,70 @@
+######################################################################
+######################################################################
+
+	README --- IMPORTANT
+
+######################################################################
+######################################################################
+
+Sections
+1. Installation
+2. Usage
+3. Deployement
+3. FAQ
+
+
+
+
+######################################################################
+### Installation
+######################################################################
+
+1- Install the framework folder on your server
+2- Change the database credentials in config.php
+
+
+
+
+######################################################################
+### Usage
+######################################################################
+
+The framework works like a router, every action is a predefined route. If you want
+to add routes, add them in Migrations/routes.sql, and run in your browser 
+http://localhost/.update-routes.php
+
+1- Adding a route: You need to know the HTTP method, the route parh, the controller name, the action name
+examples:  
+GET about MainController about 
+GET products/:id ProductsController show
+POST products/update ProductsController update
+
+You can use the wild cards (:id) to pass parameters in the controller action
+=> GET categories/:id/products/:id ProductsController show
+=> ProductsController::show($category_id, $product_id)
+
+
+2- Add the controller in App/Controllers folder. When creating a file on the framework, always make 
+sure to use all the needed namespace and put the right namespace of the file it self. Namespaces
+matches the directory architecture from the root. Also the add security on your file, make sure to add
+this line after the namespace declaration: 
+defined('CORE_EXEC') or die('Restriced Access');
+This line prevent loading independent file with passing by the index.php
+
+
+
+
+
+
+######################################################################
+### Deployement
+######################################################################
+
+When deploying the framework in production mode
+1- Set the ENVIRONMENT global in config.php to 'production'.
+2- REMOVE Migrations folder, because it contains all your database architecture and 
+all the routes of your framework, and you dont wnat that to be visible.
+3- REMOVE .update-routes.php
+
+
+

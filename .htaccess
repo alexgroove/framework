@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)\.(gif|jpg|png|jpeg|css|js|swf)$ /public/$1.$2 [L,NC]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+
+	RewriteRule ^(.*)$ index.php?mvc=$1 [L,QSA]
+</IfModule>
+
+Options All -Indexes
