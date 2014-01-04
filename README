@@ -38,6 +38,8 @@ Sections
 
 1- Install the framework folder on your server
 2- Change the database credentials in config.php
+3- Run http://localhost{PORT_NUMBER}/{PATH_TO_APP}/.update-routes.php in your browser
+4- Go to http://localhost{PORT_NUMBER}/{PATH_TO_APP}/ to see the main page
 
 
 
@@ -122,6 +124,19 @@ example: if you want to divise your app with an admin section, you could create 
 example: The app comes with a default SecureController in the App/Components/ folder. You can inspire yourself with this component for creating your own.
 
 
+-------------------------------------------------------------------
+--- Can multiple routes map to the same controller and action ? ---
+-------------------------------------------------------------------
+Yes, just add the routes in Migrations/route.sql
+example: 
+	-- index mapping
+	('GET', '', 'MainController', 'index'),
+	('GET', 'index', 'MainController', 'index'),
+	('GET', 'index.html', 'MainController', 'index')
+
+In this example, three different routes maps to MainController::index
+
+
 
 
 
@@ -140,6 +155,7 @@ example: ProductsController.php => App/Views/Products/
 
 4- Model file name and class name are sigular and they MUST match.
 example: Models/User.php and User
+
 
 
 

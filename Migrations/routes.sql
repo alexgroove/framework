@@ -12,7 +12,12 @@ create table routes (
 
 insert into routes (method, route, controller, action) values 
 
-	-- Statics pages
+	--- Statics Pages ---
+
+	-- index mapping
 	('GET', '', 'MainController', 'index'),
+	('GET', 'index', 'MainController', 'index'),
+	('GET', 'index.html', 'MainController', 'index'),
+	('GET', 'index.php', 'MainController', 'index'),
 
 ;
