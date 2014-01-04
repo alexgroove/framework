@@ -34,8 +34,9 @@ abstract class Model implements IModel {
 	 * @param (array) $inputs
 	 *
 	 */
-	public function __construct ($inputs=array()) {
+	public function __construct ($id_or_array=array()) {
 		$model = self::get_child_model();
+		$inputs = is_array($id_or_array) ? $id_or_array : $model::find($id_or_array);
 		foreach($inputs as $key => $value) {
 			if(!property_exists($model, $key)) {
 				throw new UnknownPropertyException($model, $key);

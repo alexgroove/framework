@@ -15,7 +15,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  */
 interface IModel {
 
-	public function __construct ($inputs);
+	public function __construct ($id_or_array);
 
 	public function save ();
 

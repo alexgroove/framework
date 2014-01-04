@@ -2,7 +2,7 @@
 
 namespace Framework\Components\Database;
 use Framework\Components\Database\Interfaces\IDatabase;
-use Framework\Components\Database\Exceptions\DeleteUnknownIdentifierException;
+use Framework\Components\Database\Exceptions\UnknownIdentifierException;
 use PDO;
 
 defined('CORE_EXEC') or die('Restricted Access');
@@ -110,6 +110,9 @@ class Database implements IDatabase {
 		$statement->execute();
 		$result = $statement->fetch(PDO::FETCH_ASSOC);
 		$statement->closeCursor();
+		if (!$result) {
+			throw new UnknownIdentifierException($table_name, $id);
+		}
 		return $result ? $result : array();
 	}
 
@@ -213,7 +216,7 @@ class Database implements IDatabase {
 	public static function delete_id ($table_name, $id) {
 		$nblignes = self::$instance->exec("DELETE FROM $table_name WHERE id = $id");
 		if ($nblignes != 1) {
-			throw new DeleteUnknownIdentifierException($table_name, $id);
+			throw new UnknownIdentifierException($table_name, $id);
 		}
 		return true;
 	}
