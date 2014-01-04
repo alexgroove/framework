@@ -25,12 +25,6 @@ interface IModel {
 
 	public static function find ($id_or_array);
 
-	protected static function create ($inputs);
-
-	protected static function delete ($id);
-
-	protected static function update ($id, $inputs);
-
 }
 
 
