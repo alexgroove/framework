@@ -47,7 +47,7 @@
 
 			<!-- MAIN WRAPPER -->
 			<div id="wrapper">
-				<xsl:apply-templates/>
+				<xsl:apply-templates select="//XML_PARTIAL_CONTAINER"/>
 			</div>
 
 			<!-- JAVASCRIPT DEPENDENCIES -->

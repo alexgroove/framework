@@ -30,8 +30,8 @@ abstract class Model implements IModel {
 	/**
 	 *
 	 * Model Constructor
-	 * Bind all $inputs to class variables
-	 * @param (array) $inputs
+	 * Bind all $inputs to class variables or find the right model associate with an id
+	 * @param (mixed) $id_or_array
 	 *
 	 */
 	public function __construct ($id_or_array=array()) {

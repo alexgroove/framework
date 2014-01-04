@@ -19,12 +19,6 @@ defined('CORE_EXEC') or die('Restricted Access');
  */
 define('ENVIRONMENT', 'development');
 
-/**
- *
- * htaccess mod_rewrite get contianer;
- *
- */
-define('REWRITE_CONTAINER', 'mvc');
 
 
 /**
@@ -37,13 +31,6 @@ define('USER', 'root');
 define('PASSWORD', 'root');
 define('DATABASE', 'framework');
 
-
-
-/**
- *
- * Autoload function
- *
- */
 
 
 /**
