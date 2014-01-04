@@ -1,6 +1,7 @@
 <?php
 
 namespace Framework\Components\View;
+use Framework\Components\View\Interfaces\IXmlPackageGenerator;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -13,7 +14,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @author Alexandre Pagé
  *
  */
-class XmlPackageGenerator {
+class XmlPackageGenerator implements IXmlPackageGenerator {
 
 
 	/**
@@ -72,18 +73,6 @@ class XmlPackageGenerator {
 			$this->package->documentElement->appendChild($packet);
 		}
 		return $this->package->saveXml();
-	}
-
-
-	/**
-	 *
-	 * - getPackage
-	 * @access public 
-	 * @return DOMDocument
-	 *
-	 */
-	public function getPackage () {
-		return $this->package->documentElement;
 	}
 }
 

@@ -44,9 +44,6 @@ define('DATABASE', 'framework');
  * Autoload function
  *
  */
-spl_autoload_register(function ($class) {
-	@require_once str_replace('\\', '/', $class).'.php';
-});	
 
 
 /**
@@ -56,19 +53,29 @@ spl_autoload_register(function ($class) {
  */
 switch (ENVIRONMENT) {
 
-	case 'production' : 
-		error_reporting(0);
-		set_exception_handler(function () {});
-		libxml_use_internal_errors(false);
-	break;
-
 	case 'development' : 
+		spl_autoload_register(function ($class) {
+			require_once str_replace('\\', '/', $class).'.php';
+		});	
 		error_reporting(E_ALL ^ E_STRICT);
 		set_exception_handler(function ($exception) {
 			echo $exception->getMessage();
 		});
 		libxml_use_internal_errors(true);
+	break;	
+
+	case 'production' : 
+	default: 
+		spl_autoload_register(function ($class) {
+			@require_once str_replace('\\', '/', $class).'.php';
+		});	
+		error_reporting(0);
+		set_exception_handler(function () {});
+		libxml_use_internal_errors(false);
+
 	break;
+
+
 }
 
 

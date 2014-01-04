@@ -26,7 +26,8 @@ Sections
 1. Installation
 2. Usage
 3. Deployement
-3. FAQ
+4. FAQ
+5. Best Practices
 
 
 
@@ -119,4 +120,30 @@ example: if you want to divise your app with an admin section, you could create 
 4- The principe of Component is that you can develop them and re-use them, if the Framework is always the same.
 
 example: The app comes with a default SecureController in the App/Components/ folder. You can inspire yourself with this component for creating your own.
+
+
+
+
+
+######################################################################
+### Best Practices
+######################################################################
+
+1- Controllers file name and class name follow this format NameController and they MUST match.
+example: Controller/MainController.php and MainController
+
+2- Resources Controller should always be plural
+example: ProductsController and NOT ProductController
+
+3- Views folder match the name of the controller with the suffix Controller.
+example: ProductsController.php => App/Views/Products/
+
+4- Model file name and class name are sigular and they MUST match.
+example: Models/User.php and User
+
+
+
+
+
+
 

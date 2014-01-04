@@ -1,6 +1,7 @@
 <?php
 
 namespace Framework\Components\Database;
+use Framework\Components\Database\Interfaces\IDatabase;
 use Framework\Components\Database\Exceptions\DeleteUnknownIdentifierException;
 use PDO;
 
@@ -17,7 +18,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @author Alexandre Pagé
  *
  */
-class Database {
+class Database implements IDatabase {
 
 
 	/**
@@ -199,7 +200,7 @@ class Database {
 
 	/**
 	 *
-	 * - update_id
+	 * - delete_id
 	 * @access public
 	 * @static	 
 	 * This method delete the row corresponding to the id
@@ -244,12 +245,12 @@ class Database {
 
 	/**
 	 *
-	 * - getAllTables
+	 * - get_all_tables
 	 * @static 
 	 * @access public
 	 *
 	 */
-	public static function getAllTables () {
+	public static function get_all_tables () {
 		$result = self::$instance->query('SHOW TABLES');
 		$acc = array();
 		$position = 0;

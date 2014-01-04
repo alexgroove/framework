@@ -1,6 +1,7 @@
 <?php
 
 namespace Framework\Components\Model;
+use Framework\Components\Model\Interfaces\IModel;
 use Framework\Components\Model\Exceptions\UnknownPropertyException;
 use Framework\Components\Model\Exceptions\MissingTableNameException;
 use Framework\Components\Database\Database;
@@ -23,7 +24,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @abstract 
  *
  */
-abstract class Model {
+abstract class Model implements IModel {
 
 
 	/**
@@ -91,6 +92,16 @@ abstract class Model {
 		}
 		return self::create((array)$this);
 	}
+
+
+	/**
+	 *
+	 * - remove 
+	 * @access public
+	 * @return (array) - delete model
+	 *
+	 */
+	public function remove () {}
 
 
 	/**

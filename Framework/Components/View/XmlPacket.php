@@ -1,6 +1,7 @@
 <?php
 
 namespace Framework\Components\View;
+use Framework\Components\View\Interfaces\IXmlPacket;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -13,7 +14,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @author Alexandre Pagé
  *
  */
-class XmlPacket {
+class XmlPacket implements IXmlPacket {
 
 
 	/**

@@ -1,6 +1,7 @@
 <?php
 
 namespace Framework\Components\View;
+use Framework\Components\View\Interfaces\IView;
 use Framework\Components\View\Exceptions\NoStylesheetFoundException;
 
 defined('CORE_EXEC') or die('Restricted Access');
@@ -14,7 +15,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @author Alexandre Pagé
  *
  */
-class View {
+class View implements IView {
 
 
 	/**

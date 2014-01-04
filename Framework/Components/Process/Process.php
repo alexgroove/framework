@@ -1,6 +1,7 @@
 <?php
 
 namespace Framework\Components\Process;
+use Framework\Components\Process\Interfaces\IProcess;
 use Framework\Components\Process\Exceptions\ControllerFileNotFoundException;
 use Framework\Components\Process\Exceptions\ControllerClassNotFoundException;
 use Framework\Components\Process\Exceptions\ControllerMethodNotFoundException;
@@ -18,7 +19,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @author Alexandre Pagé
  *
  */
-class Process {
+class Process implements IProcess {
 
 
 	/**

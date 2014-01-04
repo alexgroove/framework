@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Components\SecureController;
+use App\Components\SecureController\Interfaces\ISecureController;
 use Framework\Components\Controller\Controller;
 use Framework\Components\Session\Session;
 use App\Components\SecureController\Exceptions\ForbiddenSectionException;
@@ -19,7 +20,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @author Alexandre Pagé
  *
  */
-abstract class SecureController extends Controller {
+abstract class SecureController extends Controller implements ISecureController {
 
 
 	/**

@@ -1,6 +1,7 @@
 <?php
 
 namespace Framework\Components\Routing;
+use Framework\Components\Routing\Interfaces\IRequest;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -13,7 +14,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @author Alexandre Pagé
  *
  */
-class Request {
+class Request implements IRequest {
 	
 
 	/**

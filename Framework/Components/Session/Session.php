@@ -1,6 +1,7 @@
 <?php
 
 namespace Framework\Components\Session;
+use Framework\Components\Session\Interfaces\ISession;
 use Framework\Components\Session\Exceptions\UnableToStartSessionException;
 
 defined('CORE_EXEC') or die('Restricted Access');
@@ -19,7 +20,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  *
  *
 **/
-class Session {
+class Session implements ISession {
 
 
 	/**
