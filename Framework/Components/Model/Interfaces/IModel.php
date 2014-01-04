@@ -23,13 +23,13 @@ interface IModel {
 
 	public static function all ();
 
-	public static function create ($inputs);
-
 	public static function find ($id_or_array);
 
-	public static function delete ($id);
+	protected static function create ($inputs);
 
-	public static function update ($id, $inputs);
+	protected static function delete ($id);
+
+	protected static function update ($id, $inputs);
 
 }
 
