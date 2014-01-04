@@ -101,7 +101,9 @@ abstract class Model implements IModel {
 	 * @return (array) - delete model
 	 *
 	 */
-	public function remove () {}
+	public function remove () {
+		return self::delete($this->id);
+	}
 
 
 	/**
