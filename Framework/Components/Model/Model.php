@@ -128,7 +128,7 @@ abstract class Model implements IModel {
 	 * @return (array) - last inserted row
 	 *
 	 */
-	public static function create ($inputs=array()) {
+	protected static function create ($inputs=array()) {
 		if (!defined('static::TABLE_NAME')) {
 			throw new MissingTableNameException();
 		}		
@@ -166,7 +166,7 @@ abstract class Model implements IModel {
 	 * @return (array) - deleted row
 	 *
 	 */
-	public static function delete ($id) {
+	protected static function delete ($id) {
 		if (!defined('static::TABLE_NAME')) {
 			throw new MissingTableNameException();
 		}		
@@ -185,7 +185,7 @@ abstract class Model implements IModel {
 	 * @return (array) - updated row
 	 *
 	 */
-	public static function update ($id, $inputs=array()) {
+	protected static function update ($id, $inputs=array()) {
 		if (!defined('static::TABLE_NAME')) {
 			throw new MissingTableNameException();
 		}		
