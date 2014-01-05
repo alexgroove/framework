@@ -199,7 +199,7 @@ abstract class Model implements IModel {
 	 *
 	 * - validate
 	 * This method is the server validation call when save method is call.
-	 * Use it in child model to validate.
+	 * Use it in child model  to validate.
 	 * @abstract
 	 * @return (bool)
 	 *
