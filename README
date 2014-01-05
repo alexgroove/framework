@@ -166,6 +166,10 @@ defined('CORE_EXEC') or die('Restricted Access');
 6- When creating links and references in the views files, always you absolute link, prefixing the $HTTP_LOCATION parameter.
 example: <link rel="stylesheet" type="text/css" href="{$HTTP_LOCATION}public/css/main.css"/>
 
+7- Model primary key is ALWAYS call $id and in sql it MUST be implement as: id int not null auto_increment primary key
+
+8- Model foreign key have this format name_id.
+example: $category_id
 
 
 

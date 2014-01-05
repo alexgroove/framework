@@ -59,7 +59,7 @@ abstract class Controller implements IController  {
 	 * @param (array) $params - variables pass in the GET
 	 *
 	 */
-	public function redirect ($path='', $params=array()) {
+	public static function redirect ($path='', $params=array()) {
 		if (headers_sent()) {
 			throw new HeadersAlreadySentException();
 		}

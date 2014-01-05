@@ -17,6 +17,6 @@ interface IController {
 
 	public function __construct ();
 
-	public function redirect ($path, $params);
+	public static function redirect ($path, $params);
 
 }
