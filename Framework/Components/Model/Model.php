@@ -111,6 +111,8 @@ abstract class Model implements IModel {
 	/**
 	 *
 	 * - all
+	 * @static
+	 * @access public
 	 * @return (array) - result from Database select_all method
 	 *
 	 */
@@ -124,23 +126,9 @@ abstract class Model implements IModel {
 
 	/**
 	 *
-	 * - create
-	 * @param (array) $inputs - columns values
-	 * @return (array) - last inserted row
-	 *
-	 */
-	protected static function create ($inputs=array()) {
-		if (!defined('static::TABLE_NAME')) {
-			throw new MissingTableNameException();
-		}		
-		$id = Database::insert(static::TABLE_NAME, (array)$inputs);
-		return Database::select_id(static::TABLE_NAME, $id);
-	}
-
-
-	/**
-	 *
 	 * - find
+	 * @static
+	 * @access public
 	 * @param (mixed) $id_or_array
 	 * @return (array) - if param is id, return an array representing on row,
 	 * if param is an array, return an array of arrays representing the
@@ -161,13 +149,33 @@ abstract class Model implements IModel {
 
 	/**
 	 *
+	 * - create
+	 * @static
+	 * @access private
+	 * @param (array) $inputs - columns values
+	 * @return (array) - last inserted row
+	 *
+	 */
+	private static function create ($inputs=array()) {
+		if (!defined('static::TABLE_NAME')) {
+			throw new MissingTableNameException();
+		}		
+		$id = Database::insert(static::TABLE_NAME, (array)$inputs);
+		return Database::select_id(static::TABLE_NAME, $id);
+	}
+
+
+	/**
+	 *
 	 * - delete
 	 * This method delete the row with the param id
+	 * @static
+	 * @access private
 	 * @param (int) $id
 	 * @return (array) - deleted row
 	 *
 	 */
-	protected static function delete ($id) {
+	private static function delete ($id) {
 		if (!defined('static::TABLE_NAME')) {
 			throw new MissingTableNameException();
 		}		
@@ -181,12 +189,14 @@ abstract class Model implements IModel {
 	 *
 	 * - update
 	 * This method update a row with the param id with the inputs
+	 * @static
+	 * @access private
 	 * @param (int) $id
 	 * @param (array) $inputs
 	 * @return (array) - updated row
 	 *
 	 */
-	protected static function update ($id, $inputs=array()) {
+	private static function update ($id, $inputs=array()) {
 		if (!defined('static::TABLE_NAME')) {
 			throw new MissingTableNameException();
 		}		
@@ -200,6 +210,7 @@ abstract class Model implements IModel {
 	 * - validate
 	 * This method is the server validation call when save method is call.
 	 * Use it in child model to validate.
+	 * @access protected
 	 * @abstract
 	 * @return (bool)
 	 *

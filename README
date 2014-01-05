@@ -171,6 +171,10 @@ example: <link rel="stylesheet" type="text/css" href="{$HTTP_LOCATION}public/css
 8- Model foreign key have this format name_id.
 example: $category_id
 
+9- Use view parameters in Controllers, it has a great power. Just remember to add them to your XSL templates files.
+example: $this->view->set('title', 'My Super Title'); - set the title of the page
+example: $this->view->set('css-styling', 'bootstrap'); - changing css style on the fly
+
 
 
 
