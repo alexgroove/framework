@@ -88,10 +88,11 @@ abstract class Model implements IModel {
 	 *
 	 */
 	public function save () {
-		if (!empty($this->id)) {
-			return self::update($this->id, (array)$this);
+		if ($this->validate()) {
+			(empty($this->id)) ? self::create((array)$this) : self::update($this->id, (array)$this);
+			return true;
 		}
-		return self::create((array)$this);
+		return false;
 	}
 
 
@@ -192,6 +193,18 @@ abstract class Model implements IModel {
 		Database::update_id(static::TABLE_NAME, $id, $inputs);
 		return Database::select_id(static::TABLE_NAME, $id);
 	}
+
+
+	/**
+	 *
+	 * - validate
+	 * This method is the server validation call when save method is call.
+	 * Use it in child model to validate.
+	 * @abstract
+	 * @return (bool)
+	 *
+	 */ 
+	abstract protected function validate ();
 
 
 	/**

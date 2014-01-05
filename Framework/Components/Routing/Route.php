@@ -31,4 +31,8 @@ class Route extends Model {
 	public $controller;
 	public $action;
 
+	protected function validate () {
+		return true;
+	}
+
 }
