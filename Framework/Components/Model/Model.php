@@ -116,11 +116,11 @@ abstract class Model implements IModel {
 	 * @return (array) - result from Database select_all method
 	 *
 	 */
-	public static function all () {
+	public static function all ($limit=-1) {
 		if (!defined('static::TABLE_NAME')) {
 			throw new MissingTableNameException();
 		}		
-		return Database::select_all(static::TABLE_NAME);
+		return Database::select_all(static::TABLE_NAME, $limit);
 	}
 
 
@@ -135,12 +135,12 @@ abstract class Model implements IModel {
 	 * matching rows int the table
 	 *
 	 */	
-	public static function find ($id_or_array) {
+	public static function find ($id_or_array, $limit=-1) {
 		if (!defined('static::TABLE_NAME')) {
 			throw new MissingTableNameException();
 		}
 		if (is_array($id_or_array)) {
-			return Database::select_where(static::TABLE_NAME, $id_or_array);
+			return Database::select_where(static::TABLE_NAME, $id_or_array, $limit);
 		} else {
 			return Database::select_id(static::TABLE_NAME, $id_or_array);
 		}

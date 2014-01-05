@@ -82,7 +82,10 @@ class Database implements IDatabase {
 	 *
 	 */
  	public static function select_all ($table_name) {
- 		$query_str = "SELECT * FROM $table_name";
+ 		$query_str = "SELECT * FROM $table_name";	 		
+ 		if ($limit > -1) {
+ 			$query_str .= " LIMIT $limit";
+ 		}
 		if (!$statement = self::$instance->query($query_str)) {
 			throw new \Exception("Database query error: ".__METHOD__, 1);
 		}
@@ -129,7 +132,7 @@ class Database implements IDatabase {
 	 * @return (array) $result
 	 *
 	 */
-	public static function select_where ($table_name, $conditions=array()) {
+	public static function select_where ($table_name, $conditions=array(), $limit=-1) {
 		$acc = "";
 		$bind_params = array();
 		foreach($conditions as $key => $value) {
@@ -139,6 +142,9 @@ class Database implements IDatabase {
 		$acc = rtrim($acc, "AND ");
 
 		$query = "SELECT * FROM $table_name WHERE $acc";
+		if ($limit > -1) {
+			$query .= " LIMIT $limit";
+		}
 		$statement = self::$instance->prepare($query);
 		$statement->execute($bind_params);
 		$result = $statement->fetchAll(PDO::FETCH_ASSOC);

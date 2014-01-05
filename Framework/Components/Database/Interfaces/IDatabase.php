@@ -18,11 +18,11 @@ interface IDatabase {
 
 	public static function init ();
 
-	public static function select_all ($table_name);
+	public static function select_all ($table_name, $limit);
 
 	public static function select_id ($table_name, $id);
 
-	public static function select_where ($table_name, $conditions);
+	public static function select_where ($table_name, $conditions, $limit);
 
 	public static function insert ($table_name, $inputs);
 

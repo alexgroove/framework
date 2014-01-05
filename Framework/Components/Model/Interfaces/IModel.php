@@ -59,7 +59,7 @@ interface IModel {
 	 * @return (array) - result from Database select_all method
 	 *
 	 */
-	public static function all ();
+	public static function all ($limit);
 
 
 	/**
@@ -73,7 +73,7 @@ interface IModel {
 	 * matching rows int the table
 	 *
 	 */	
-	public static function find ($id_or_array);
+	public static function find ($id_or_array, $limit);
 
 }
 
