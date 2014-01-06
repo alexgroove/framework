@@ -15,8 +15,4 @@ defined('CORE_EXEC') or die('Restricted Access');
  */
 interface IController {
 
-	public function __construct ();
-
-	public static function redirect ($path, $params);
-
 }

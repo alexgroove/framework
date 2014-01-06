@@ -41,11 +41,14 @@ abstract class Controller implements IController  {
 	 * This method bind the class variable to a new View object
 	 * You can also set params for the view
 	 * HTTP_LOCATION is a essential param for the view
+	 * If REQUEST METHOD is POST, the view is not instanciate. This will fasten the process.
 	 *
 	 */
 	public function __construct () { 
-		$this->view = new View();
-		$this->view->set('HTTP_LOCATION', location());
+		if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+			$this->view = new View();
+			$this->view->set('HTTP_LOCATION', location());
+		}
 	}
 
 
@@ -54,12 +57,12 @@ abstract class Controller implements IController  {
 	 * -redirect
 	 * Method use to redirect to another controller using http url
 	 * If headers already sent, throw an Exception
-	 *
+	 * @access protected
 	 * @param (string) $path - url to be redirect
 	 * @param (array) $params - variables pass in the GET
 	 *
 	 */
-	public static function redirect ($path='', $params=array()) {
+	protected static function redirect ($path='', $params=array()) {
 		if (headers_sent()) {
 			throw new HeadersAlreadySentException();
 		}

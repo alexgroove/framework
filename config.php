@@ -45,9 +45,7 @@ switch (ENVIRONMENT) {
 			require_once str_replace('\\', '/', $class).'.php';
 		});	
 		error_reporting(E_ALL ^ E_STRICT);
-		set_exception_handler(function ($exception) {
-			echo $exception->getMessage();
-		});
+		set_exception_handler('core_exception_handler');
 		libxml_use_internal_errors(true);
 	break;	
 
@@ -61,8 +59,21 @@ switch (ENVIRONMENT) {
 		libxml_use_internal_errors(false);
 
 	break;
+}
 
 
+
+
+
+
+function core_exception_handler (Exception $exception) {
+	$msg = "<div style='border: 1px solid black; padding: 10px;'>";
+	$msg .= '<pre><strong style=\'color: red; \'>Message</strong>: '.$exception->getMessage().'<br/>';
+	$msg .= 'File: '.$exception->getFile().'<br/>';
+	$msg .= 'Line: '.$exception->getLine().'<br/>';
+	$msg .= '</pre>';
+	$msg .= '</div>';
+	echo $msg;
 }
 
 

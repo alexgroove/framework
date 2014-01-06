@@ -81,7 +81,7 @@ class Database implements IDatabase {
 	 * @return (array) $result
 	 *
 	 */
- 	public static function select_all ($table_name) {
+ 	public static function select_all ($table_name, $limit=-1) {
  		$query_str = "SELECT * FROM $table_name";	 		
  		if ($limit > -1) {
  			$query_str .= " LIMIT $limit";
