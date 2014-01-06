@@ -175,7 +175,11 @@ example: $category_id
 example: $this->view->set('title', 'My Super Title'); - set the title of the page
 example: $this->view->set('css-styling', 'bootstrap'); - changing css style on the fly
 
+10- When the controller::method is call over a POST route, make the function static
+example: ProductsController::create => public static function create () {}
 
+11- For fasten your App, when usign the render method, use the caching functionnalities. You can set also set the caching time, default is 300 second
+example: $this->view->render('App/Views/Main/show-products', true, 400);
 
 
 

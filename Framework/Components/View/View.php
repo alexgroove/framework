@@ -117,7 +117,7 @@ class View implements IView {
 	 * @return (string) - transformation result
 	 *
 	 */
-	public function render ($path, $cache=false, $cachetime=60) {
+	public function render ($path, $cache=false, $cachetime=300) {
 		if ($cache && ENVIRONMENT == PRODUCTION) {
 			if (!is_dir(self::CACHE_FOLDER)) {
 				throw new CacheFolderMissingException(self::CACHE_FOLDER);
