@@ -49,17 +49,29 @@ class Response implements IResponse {
 	
 	/**
 	 *
+	 * @var $http_caching
+	 * HTTP caching wont happen of the ENVIRONMENT is on DEVELOPMENT
+	 * @access private
+	 *
+	 */
+	private $http_caching;
+	
+
+	/**
+	 *
 	 * Response Contructor
 	 * @access public
 	 * @param (string) $content;
 	 * @param (Reponse constant) $http_code
 	 * @param (string) $content_type
+	 * @param (int) $http_caching - time in second that you want the browser to cache a file
 	 *
 	 */	
-	public function __construct ($content='', $http_code=self::HTTP_OK, $content_type='text/html') {
+	public function __construct ($content='', $http_code=self::HTTP_OK, $content_type='text/html', $http_caching=-1) {
 		$this->content = $content;
 		$this->http_code = $http_code;
 		$this->content_type = $content_type;
+		$this->http_caching = $http_caching;
 	}
 
 	
@@ -101,17 +113,33 @@ class Response implements IResponse {
 
 	/**
 	 *		
+	 * - setCaching
+	 * @access public
+	 * @param (string) $content
+	 *		
+	 */
+	public function setCaching ($http_caching=-1) {
+		$this->http_caching = $http_caching;
+	}
+
+
+	/**
+	 *		
 	 * - send		
 	 * @access public
 	 * @param $content (optional) - use to faster sending content.
 	 *		
 	 */
-	public function send($content='') {
+	public function send ($content='') {
 		if (headers_sent()) {
 			throw new HeadersAlreadySentException();
 		}
 		header('HTTP/1.1 '. $this->http_code);
 		header('Content-type: '.$this->content_type);
+		if ($this->http_caching > 0 && ENVIRONMENT != DEVELOPMENT) {
+	    header("Pragma: public");
+	    header('Cache-Control: max-age='.$this->http_caching);
+	  }
 		echo empty($content) ? $this->content : $content;
 		return true;
 	}
