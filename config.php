@@ -17,8 +17,9 @@ defined('CORE_EXEC') or die('Restricted Access');
  * ENVIRONMENT
  *
  */
-define('ENVIRONMENT', 'development');
-
+define('DEVELOPMENT', 'development');
+define('PRODUCTION', 'production');
+define('ENVIRONMENT', PRODUCTION);
 
 
 /**

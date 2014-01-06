@@ -21,7 +21,7 @@ interface IView {
 
 	public function set ($key, $value);
 
-	public function render ($path);	
+	public function render ($path, $cache, $cachetime);	
 
 }
 

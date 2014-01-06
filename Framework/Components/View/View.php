@@ -3,6 +3,7 @@
 namespace Framework\Components\View;
 use Framework\Components\View\Interfaces\IView;
 use Framework\Components\View\Exceptions\NoStylesheetFoundException;
+use Framework\Components\View\Exceptions\CacheFolderMissingException;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -16,6 +17,23 @@ defined('CORE_EXEC') or die('Restricted Access');
  *
  */
 class View implements IView {
+
+
+
+	/**
+	 *
+	 * @constant TEMPLATE_EXTENSION
+	 *
+	 */
+	const TEMPLATE_EXTENSION = '.xsl';
+
+
+	/**
+	 *
+	 * @constant CACHE_FOLDER
+	 *
+	 */
+	const CACHE_FOLDER = 'public/cache/';
 
 
 	/**
@@ -38,12 +56,11 @@ class View implements IView {
 
 	/**
 	 *
-	 * @var $template_extension
+	 * @var $cache_file_name
 	 * @access private
 	 *
 	 */
-	private $template_extension = '.xsl';
-
+	private $cache_file_name;
 
 	/**
 	 *
@@ -92,21 +109,37 @@ class View implements IView {
 	/**
 	 *
 	 * - render
+	 * Caching can only take place in production ENVIRONMENT
 	 * @access public
 	 * @param (string) $path - path to view stylesheet (without extension)
+	 * @param (bool) $cache - if the result should use caching
+	 * @param (int) $cachetime - number of second 
 	 * @return (string) - transformation result
 	 *
 	 */
-	public function render ($path) {
-		$stylesheet_path = $path.$this->template_extension;
+	public function render ($path, $cache=false, $cachetime=60) {
+		if ($cache && ENVIRONMENT == PRODUCTION) {
+			if (!is_dir(self::CACHE_FOLDER)) {
+				throw new CacheFolderMissingException(self::CACHE_FOLDER);
+			}
+			$this->cache_file_name = self::CACHE_FOLDER.md5($path);
+			if (file_exists($this->cache_file_name)) {
+				if (time() - $cachetime < @filemtime($this->cache_file_name)) {
+					return file_get_contents($this->cache_file_name);
+				}
+			}
+		}
+		$stylesheet_path = $path.self::TEMPLATE_EXTENSION;
 		if (!file_exists($stylesheet_path)) {
 			throw new NoStylesheetFoundException ($stylesheet_path);
 		}
 		$this->processor->importStylesheet(simplexml_load_file($stylesheet_path));
 		if ($result = $this->processor->transformToXml(simplexml_load_string($this->package->compressToXml()))) {
+			if ($cache && ENVIRONMENT == PRODUCTION) {
+				file_put_contents($this->cache_file_name, $result);
+			}
 			return $result;
 		} else {
-			// Print XML errors if the views didnt render properly
 			pprint(libxml_get_errors());
 		}
 	}
