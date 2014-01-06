@@ -24,7 +24,7 @@ class MainController extends SecureController {
 		$this->view->set('description', 'This is the meta description');
 		$this->view->set('keywords', 'Choose your words wisely');
 		
-		// Send response with rendered View
+		// Render the view
 		$content = $this->view->render('App/Views/Main/index');
 
 		// Use setCaching to activate the HTTP caching on the client browser. 

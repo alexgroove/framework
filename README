@@ -13,12 +13,11 @@
 	
 --- MANIFESTO ---
  
-This Framework wants to be a pure representation of the MVC pattern. It used PHP, MYSQL, XSLT and XML to reach his goal. For the PHP part, it implements the concept of namespaces, interfaces and the PDO extension for accessing the Database. Informations is stock in MYSQL. For the View in MVC, the Framework use XSLT, separating completely the view from the logic. Every request is treat as a route by the front controller, the Router and then dispatch to a secondary controller that fetch the data using Models over the Database and pass them to the XSLT processor as XML data. The view then use XSL templates over the XML and render the view.
+This Framework wants to be a pure representation of the MVC pattern. It used PHP, MYSQL, XSLT and XML to reach his goal. For the PHP part, it implements the concept of namespaces, interfaces and the PDO extension for accessing the Database. Informations is stock in MYSQL. For the View in MVC, the Framework use XSLT, separating completely the view from the logic. Every request is treat as a route by the front controller, the Router and then dispatch to a secondary controller that fetch the data using Models over the Database and pass them to the XSLT processor as XML data. The view then use XSL templates over the XML and render the view. At the end you can use a Response object to control the headers and even the HTTP caching.
 
 
 ######################################################################
 ######################################################################
-
 
 
 
