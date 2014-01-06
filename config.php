@@ -62,13 +62,18 @@ switch (ENVIRONMENT) {
 }
 
 
-
-
-
-
+/**
+ *
+ * core_exception_handler
+ * Default Exception handler
+ *
+ *
+ */
 function core_exception_handler (Exception $exception) {
 	$msg = "<div style='border: 1px solid black; padding: 10px;'>";
-	$msg .= '<pre><strong style=\'color: red; \'>Message</strong>: '.$exception->getMessage().'<br/>';
+	$msg .= "<span><strong style='text-decoration: underline;'>Exception</strong></span>";
+	$msg .= '<pre><strong style=\'color: red; \'>Message</strong>: <strong>'.$exception->getMessage().'</strong><br/>';
+	$msg .= 'Code: '.$exception->getCode().'<br/>';
 	$msg .= 'File: '.$exception->getFile().'<br/>';
 	$msg .= 'Line: '.$exception->getLine().'<br/>';
 	$msg .= '</pre>';
