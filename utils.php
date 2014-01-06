@@ -187,3 +187,18 @@ function ls ($dir_path='.', $showHiddenFiles=false) {
 }
 
 
+/**
+ *
+ * - get_class_name
+ * This function is useful for getting the class name without the namespace
+ * @param (string) $class
+ * @param (string) $namespace
+ * @example get_class_name(__CLASS__, __NAMESPACE__)
+ * @return (string)
+ *
+ */
+function get_class_name ($class, $namespace='') {
+	return ltrim($class, $namespace);
+}
+
+
