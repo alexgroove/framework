@@ -178,8 +178,12 @@ example: $this->view->set('css-styling', 'bootstrap'); - changing css style on t
 10- When the controller::method is call over a POST route, make the function static
 example: ProductsController::create => public static function create () {}
 
-11- For fasten your App, when usign the render method, use the caching functionnalities. You can set also set the caching time, default is 300 second
-example: $this->view->render('App/Views/Main/show-products', true, 400);
+11- For more control over the response sent by the framework, use the controller response object.
+example: echo $this->view->render('App/Views/Main/index');
+becomes: $content = $this->view->render('App/Views/Main/index');
+				 return $this->response->send($content);
+					
+
 
 
 

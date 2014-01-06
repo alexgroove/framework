@@ -48,8 +48,9 @@ switch (ENVIRONMENT) {
 		spl_autoload_register(function ($class) {
 			require_once str_replace('\\', '/', $class).'.php';
 		});	
-		error_reporting(E_ALL ^ E_STRICT);
+		error_reporting(E_ALL);
 		set_exception_handler('core_exception_handler');
+		set_error_handler('core_error_handler');
 		libxml_use_internal_errors(true);
 	break;	
 
@@ -60,6 +61,7 @@ switch (ENVIRONMENT) {
 		});	
 		error_reporting(0);
 		set_exception_handler(function () {});
+		set_error_handler(function () {});
 		libxml_use_internal_errors(false);
 
 	break;
@@ -74,12 +76,47 @@ switch (ENVIRONMENT) {
  *
  */
 function core_exception_handler (Exception $exception) {
-	$msg = "<div style='border: 1px solid black; padding: 10px;'>";
+	$msg = "<div style='border: 1px solid black; padding: 10px; margin: 25px;'>";
 	$msg .= "<span><strong style='text-decoration: underline;'>Exception</strong></span>";
 	$msg .= '<pre><strong style=\'color: red; \'>Message</strong>: <strong>'.$exception->getMessage().'</strong><br/>';
 	$msg .= 'Code: '.$exception->getCode().'<br/>';
 	$msg .= 'File: '.$exception->getFile().'<br/>';
 	$msg .= 'Line: '.$exception->getLine().'<br/>';
+	$msg .= '</pre>';
+	$msg .= '</div>';
+	echo $msg;
+}
+
+
+/**
+ *
+ * core_error_handler
+ * Default Exception handler
+ *
+ *
+ */
+function core_error_handler ($errno, $errstr, $errfile, $errline) {
+	$showError = false;
+	switch($errno) {
+		// Show errors
+		case E_ERROR : $error_name = 'Error'; break;
+		case E_WARNING : $error_name = 'Warning '; break;
+		case E_PARSE : $error_name = 'Parse error'; break;
+
+		// Hide errors
+		case E_NOTICE;
+		default : $showError = false; break;
+
+	}
+	if (!$showError) {
+		return true;
+	}
+	$msg = "<div style='border: 3px solid red; padding: 10px; margin: 25px;'>";
+	$msg .= "<span><strong style='text-decoration: underline;'>Error</strong></span>";
+	$msg .= '<pre><strong style=\'color: red; \'>Message</strong>: <strong>'.$errstr.'</strong><br/>';
+	$msg .= 'Name: '.$error_name.'<br/>';
+	$msg .= 'File: '.$errfile.'<br/>';
+	$msg .= 'Line: '.$errline.'<br/>';
 	$msg .= '</pre>';
 	$msg .= '</div>';
 	echo $msg;

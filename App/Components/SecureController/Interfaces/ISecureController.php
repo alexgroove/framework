@@ -16,6 +16,4 @@ defined('CORE_EXEC') or die('Restricted Access');
  */
 interface ISecureController extends IController {
 
-	public static function activate_secure_session ($priviledge_level);
-
 }

@@ -2,19 +2,20 @@
 
 namespace Framework\Components\Routing;
 use Framework\Components\Routing\Interfaces\IResponse;
+use Framework\Components\Routing\Exceptions\HeadersAlreadySentException;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
 
-class Response {
+class Response implements IResponse {
 
 
 	/**
 	 *
-	 * HTTP constant code
+	 * HTTP constant codes
 	 *
 	 */
-	const HTTP_OK = '200 OK';
+	const HTTP_OK        = '200 OK';
 	const HTTP_NOT_FOUND = '404 Not Found';
 	const HTTP_FORBIDDEN = '403 Forbidden';
 
@@ -106,6 +107,9 @@ class Response {
 	 *		
 	 */
 	public function send($content='') {
+		if (headers_sent()) {
+			throw new HeadersAlreadySentException();
+		}
 		header('HTTP/1.1 '. $this->http_code);
 		header('Content-type: '.$this->content_type);
 		echo empty($content) ? $this->content : $content;

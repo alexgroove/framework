@@ -14,6 +14,7 @@
 <xsl:param name="title" select="'MyApp'"/>
 <xsl:param name="description" select="'Set a small description of the page'"/>
 <xsl:param name="keywords" select="'Some, relevant, keywords'"/>
+<xsl:param name="flash" select="''"/>
 
 
 <!-- Disable default text output for no-matching node -->

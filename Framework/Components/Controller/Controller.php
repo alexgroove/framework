@@ -65,8 +65,6 @@ abstract class Controller implements IController  {
 
 			// Response initial setup
 			$this->response = new Response ();
-			$this->response->setStatusCode(Response::HTTP_OK);
-			$this->response->setContentType('text/html');
 		}
 	}
 

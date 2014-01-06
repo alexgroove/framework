@@ -15,7 +15,7 @@ interface IResponse {
 
 	public function setContent ($content);
 
-	public function send($content='');
+	public function send($content);
 
 }
 

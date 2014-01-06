@@ -227,6 +227,9 @@ abstract class Model implements IModel {
 	 *
 	 */
 	private static function get_child_model () {
+		if (!defined('static::TABLE_NAME')) {
+			throw new MissingTableNameException();
+		}
 		$trace = debug_backtrace();
 		return $trace[1]['object'];
 	}
