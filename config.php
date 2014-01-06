@@ -19,7 +19,9 @@ defined('CORE_EXEC') or die('Restricted Access');
  */
 define('DEVELOPMENT', 'development');
 define('PRODUCTION', 'production');
-define('ENVIRONMENT', PRODUCTION);
+define('TEST_PRODUCTION', 'test_production');
+define('ENVIRONMENT', TEST_PRODUCTION);
+
 
 
 /**
@@ -41,7 +43,8 @@ define('DATABASE', 'framework');
  */
 switch (ENVIRONMENT) {
 
-	case 'development' : 
+	case DEVELOPMENT : 
+	case TEST_PRODUCTION : 
 		spl_autoload_register(function ($class) {
 			require_once str_replace('\\', '/', $class).'.php';
 		});	
@@ -50,7 +53,7 @@ switch (ENVIRONMENT) {
 		libxml_use_internal_errors(true);
 	break;	
 
-	case 'production' : 
+	case PRODUCTION : 
 	default: 
 		spl_autoload_register(function ($class) {
 			@require_once str_replace('\\', '/', $class).'.php';
