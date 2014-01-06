@@ -15,7 +15,9 @@ class MainController extends Controller {
 		$this->view->set('title', __METHOD__);
 		$this->view->set('description', 'This is the meta description');
 		$this->view->set('keywords', 'Choose your words wisely');
-		echo $this->view->render('App/Views/Main/index');
+		
+		$content = $this->view->render('App/Views/Main/index');
+		return $this->response->send($content);
 	}
 }
 

@@ -109,6 +109,7 @@ class Response {
 		header('HTTP/1.1 '. $this->http_code);
 		header('Content-type: '.$this->content_type);
 		echo empty($content) ? $this->content : $content;
-
+		return true;
 	}
 }
+
