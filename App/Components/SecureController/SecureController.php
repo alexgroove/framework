@@ -90,7 +90,11 @@ abstract class SecureController extends Controller implements ISecureController 
 
 		// View extra parameters
 		if (isset($this->view)) {
-			$this->view->set('flash', @$_GET['flash']);
+			
+			// Set flash message if it is set
+			if (isset($_GET['flash'])) {
+				$this->view->set('flash', $_GET['flash']);
+			}
 		}
 
 		// Response settings

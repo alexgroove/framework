@@ -8,7 +8,29 @@
  * This file is the main framework file.
  * Everything should be execute from here.
  *
+ * @author Alexandre Pagé
+ *
  */
+
+
+/**
+ *
+ * Check php version MUST by equal or higher that 5.4.4
+ *
+ */
+if (version_compare(phpversion(), '5.4.4', '<')) {
+	die('Your PHP version on your server is not high enough, 5.4.4 is required');
+}
+
+
+/**
+ *
+ * CORE_EXEC (constant)
+ * This constant is the front gate guardian of the framework.
+ * It also generate a secure id that can be use.
+ *
+ */
+define('CORE_EXEC', hash('sha256', uniqid(rand(), true)));
 
 
 /**
@@ -20,16 +42,6 @@ use Framework\Components\Database\Database;
 use Framework\Components\Session\Session;
 use Framework\Components\Routing\Request;
 use Framework\Components\Routing\Router;
-
-
-/**
- *
- * CORE_EXEC (constant)
- * This constant is the front gate guardian of the framework.
- * It also generate a secure id that can be use.
- *
- */
-define('CORE_EXEC', hash('sha256', uniqid(rand(), true)));
 
 
 /**

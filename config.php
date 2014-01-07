@@ -96,15 +96,15 @@ function core_exception_handler (Exception $exception) {
  *
  */
 function core_error_handler ($errno, $errstr, $errfile, $errline) {
-	$showError = false;
+	$showError = true;
 	switch($errno) {
 		// Show errors
 		case E_ERROR : $error_name = 'Error'; break;
 		case E_WARNING : $error_name = 'Warning '; break;
 		case E_PARSE : $error_name = 'Parse error'; break;
+		case E_NOTICE : $error_name = 'Notice'; break;
 
 		// Hide errors
-		case E_NOTICE;
 		default : $showError = false; break;
 
 	}
