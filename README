@@ -139,6 +139,32 @@ In this example, three different routes maps to MainController::index
 
 
 
+--------------------------------------
+--- How to pass data to the view ? ---
+--------------------------------------
+
+To pass data the the view, for example and array of products. Use the model function that fetch the data and the bind method from the view.
+example: $this->view->bind('Products', Product::all());
+example: $this->view->bind('Products', Product::find(array('category_id' => 2)));
+
+The bind method takes the name you want the parent node to be call, and the data. If the data if an array of array, it will make the child XML node to be the parent node name but in singular.
+example: $this->view->bind('Products', Product::all()); will make: 
+<Products>
+	<Product>
+		<id>1</id>
+		</name>Soulier</name>
+		<price>49.99</price>
+	</Product>
+	<Product>
+		<id>2</id>
+		</name>Raquette</name>
+		<price>109.95</price>
+	</Product>
+</Products>
+
+
+
+
 
 
 

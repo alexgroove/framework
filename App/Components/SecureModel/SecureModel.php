@@ -3,7 +3,6 @@
 namespace App\Components\SecureModel;
 use Framework\Components\Model\Model;
 use App\Components\SecureModel\Exceptions\MissingSecureFieldsException;
-use App\Components\SecureModel\Exceptions\UnknownCredentialException;
 use App\Components\SecureModel\Interfaces\ISecureModel;
 
 
@@ -16,6 +15,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * 
  * --- IMPORTANT ---
  * All child model MUST implement a constant SECURE_FIELDS. This constant is a comma separeted list.
+ * @example 'password,username'
  *
  * @author Alexandre Pagé
  *
@@ -60,11 +60,11 @@ abstract class SecureModel extends Model implements ISecureModel {
 	 */
 	public static function secure_get ($credentials=array()) {
 		$secure_fields = explode(',', static::SECURE_FIELDS);
-		foreach($secure_fields as $field) {
-			if (!isset($credentials[$field])) {
-				throw new UnknownCredentialException($field);
+
+		foreach($credentials as $key => $value) {
+			if (in_array($key, $secure_fields)) {
+				$credentials[$key] = hash('sha256', $value);
 			}
-			$credentials[$field] = hash('sha256', $credentials[$field]);
 		}
 		$result = self::find($credentials, 1);
 		if (count($result) == 1)

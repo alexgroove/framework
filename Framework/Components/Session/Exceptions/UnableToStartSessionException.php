@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Components\Session\Exception;
+namespace Framework\Components\Session\Exceptions;
 
 defined('CORE_EXEC') or die('Restrited Access');
 

@@ -115,7 +115,7 @@ class Response implements IResponse {
 	 *		
 	 * - setCaching
 	 * @access public
-	 * @param (string) $content
+	 * @param (int) $http_caching - number of second you want the browser to cache the response
 	 *		
 	 */
 	public function setCaching ($http_caching=-1) {
