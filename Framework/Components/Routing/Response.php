@@ -50,7 +50,7 @@ class Response implements IResponse {
 	/**
 	 *
 	 * @var $http_caching
-	 * HTTP caching wont happen of the ENVIRONMENT is on DEVELOPMENT
+	 * HTTP caching wont happen if the ENVIRONMENT is on DEVELOPMENT
 	 * @access private
 	 *
 	 */
