@@ -118,7 +118,7 @@ class Response implements IResponse {
 	 * @param (int) $http_caching - number of second you want the browser to cache the response
 	 *		
 	 */
-	public function setCaching ($http_caching=-1) {
+	public function setCaching ($http_caching=86400) {
 		$this->http_caching = $http_caching;
 	}
 
@@ -134,7 +134,7 @@ class Response implements IResponse {
 		if (headers_sent()) {
 			throw new HeadersAlreadySentException();
 		}
-		header('HTTP/1.1 '. $this->http_code);
+		header('HTTP/1.0 '. $this->http_code);
 		header('Content-type: '.$this->content_type);
 		if ($this->http_caching > 0 && ENVIRONMENT != DEVELOPMENT) {
 	    header("Pragma: public");

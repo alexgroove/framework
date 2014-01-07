@@ -48,9 +48,14 @@ switch (ENVIRONMENT) {
 		spl_autoload_register(function ($class) {
 			require_once str_replace('\\', '/', $class).'.php';
 		});	
-		error_reporting(E_ALL);
+		error_reporting(0);
 		set_exception_handler('core_exception_handler');
 		set_error_handler('core_error_handler');
+		register_shutdown_function(function () {
+			if ($error = error_get_last()) {
+				call_user_func_array('core_error_handler', $error);
+			}
+		});
 		libxml_use_internal_errors(true);
 	break;	
 
