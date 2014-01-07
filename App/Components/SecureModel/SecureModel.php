@@ -59,8 +59,10 @@ abstract class SecureModel extends Model implements ISecureModel {
 	 *
 	 */
 	public static function secure_get ($credentials=array()) {
+		if (!defined('static::SECURE_FIELDS')) {
+			throw new MissingSecureFieldsException(get_called_class());
+		}
 		$secure_fields = explode(',', static::SECURE_FIELDS);
-
 		foreach($credentials as $key => $value) {
 			if (in_array($key, $secure_fields)) {
 				$credentials[$key] = hash('sha256', $value);

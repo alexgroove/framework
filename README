@@ -180,7 +180,7 @@ example: App/Controllers/MainController.php and MainController
 2- Resources Controller should always be plural
 example: ProductsController and NOT ProductController
 
-3- Views folder match the name of the controller with the suffix Controller.
+3- Views folder match the name of the controller without the suffix Controller.
 example: ProductsController.php => App/Views/Products/
 
 4- Model file name and class name are sigular and they MUST match.
@@ -189,7 +189,7 @@ example: App/Models/User.php and User
 5- All controller file MUST have this line after the namespace declaration.
 defined('CORE_EXEC') or die('Restricted Access');
 
-6- When creating links and references in the views files, always you absolute link, prefixing the $HTTP_LOCATION parameter.
+6- When creating links and references in the views files, always use absolute link, prefixing the $HTTP_LOCATION parameter.
 example: <link rel="stylesheet" type="text/css" href="{$HTTP_LOCATION}public/css/main.css"/>
 
 7- Model primary key is ALWAYS call $id and in sql it MUST be implement as: id int not null auto_increment primary key
