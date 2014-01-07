@@ -3,6 +3,7 @@
 namespace Framework\Components\Database;
 use Framework\Components\Database\Interfaces\IDatabase;
 use Framework\Components\Database\Exceptions\UnknownIdentifierException;
+use Framework\Components\Database\Exceptions\QueryErrorException;
 use PDO;
 
 defined('CORE_EXEC') or die('Restricted Access');
@@ -52,20 +53,16 @@ class Database implements IDatabase {
 	 *
 	 */
 	public static function init () {
+		// The registration is use to prevent a database connection to stay open
+		// when a script fail. It set the connection instance to null, ready
+		// for garbage collection.
+		register_shutdown_function(function () {
+			self::$instance = null;
+		});
 		if (is_null(self::$instance)) {
-			try {
-				self::$instance = new PDO ('mysql:host='.HOST.';dbname='.DATABASE, USER, PASSWORD);
-				self::$instance->exec('SET NAMES UTF8');
-			} catch (\PDOException $e) {
-				echo $e->getMessage();
-			}
-
-			// The registration is use to prevent a database connection to stay open
-			// when a script fail. It set the connection instance to null, ready
-			// for garbage collection.
-			register_shutdown_function(function () {
-				self::$instance = null;
-			});
+			self::$instance = new PDO ('mysql:host='.HOST.';dbname='.DATABASE, USER, PASSWORD);
+			self::$instance->exec('SET NAMES UTF8');
+			self::$instance->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); 
 		}
 	}
 
@@ -87,7 +84,7 @@ class Database implements IDatabase {
  			$query_str .= " LIMIT $limit";
  		}
 		if (!$statement = self::$instance->query($query_str)) {
-			throw new \Exception("Database query error: ".__METHOD__, 1);
+			throw new QueryErrorException(__METHOD__, self::$instance->errorInfo());
 		}
 		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 		$statement->closeCursor();
@@ -109,6 +106,9 @@ class Database implements IDatabase {
 	 */
 	public static function select_id ($table_name, $id) {
 		$statement = self::$instance->prepare("SELECT * FROM $table_name WHERE id = :id");
+		if (!$statement) {
+			throw new QueryErrorException(__METHOD__, self::$instance->errorInfo());
+		}
 		$statement->bindParam(':id', $id, PDO::PARAM_INT);
 		$statement->execute();
 		$result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -146,6 +146,9 @@ class Database implements IDatabase {
 			$query .= " LIMIT $limit";
 		}
 		$statement = self::$instance->prepare($query);
+		if (!$statement) {
+			throw new QueryErrorException(__METHOD__, self::$instance->errorInfo());
+		}		
 		$statement->execute($bind_params);
 		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 		$statement->closeCursor();
@@ -158,7 +161,7 @@ class Database implements IDatabase {
 	 * - insert
 	 * @access public
 	 * @static	 
-	 * This method insert a row of inputs in a table
+	 * This method insert ONE row of inputs in a table
 	 *
 	 * @param (string) $table_name - name of the table in database
 	 * @param (array) $inputs - array of columns values
@@ -177,7 +180,7 @@ class Database implements IDatabase {
 		$query = "INSERT INTO $table_name ($keys) VALUES ($values)";
 		$nblignes = self::$instance->exec($query);
 		if ($nblignes != 1) {
-			throw new \Exception("Database query error: ".__METHOD__, 1);
+			throw new QueryErrorException(__METHOD__, self::$instance->errorInfo());
 		}
 		return self::$instance->lastInsertId();
 	}
@@ -202,7 +205,11 @@ class Database implements IDatabase {
 			$acc_set .= $key.'='.self::$instance->quote($value).',';
 		}
 		$acc_set = rtrim($acc_set, ',');
-		self::$instance->exec("UPDATE $table_name SET $acc_set WHERE id = $id");
+		$query_str = "UPDATE $table_name SET $acc_set WHERE id = $id";
+		$nblignes = self::$instance->exec($query_str);
+		if ($nblignes != 1) {
+			throw new QueryErrorException(__METHOD__, self::$instance->errorInfo());
+		}		
 		return true;
 	}
 
@@ -247,6 +254,20 @@ class Database implements IDatabase {
 	}
 
 
+	/**
+	 *
+	 * - excecute
+	 * @access public
+	 * @static
+	 * This method fetch all the result from a custom query
+	 * 
+	 * --- DANGER --- 
+	 * This method is at risk of sql injection, only use in last resort
+	 *
+	 * @param (string) $query - custom sql query string
+	 * @return (int) 
+	 *
+	 */	
 	public static function execute($query) {
 		return self::$instance->exec($query);
 	}

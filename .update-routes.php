@@ -23,5 +23,7 @@ require_once 'Framework/Components/Database/Database.php';
 $sql_routes = file_get_contents('Migrations/routes.sql');
 
 Database::init();
-Database::execute($sql_routes);
+if (Database::execute($sql_routes) == 1) {
+	throw new \Exception("Problem with your routes file: .update-routes.sql");
+}
 header('Location: '.location());

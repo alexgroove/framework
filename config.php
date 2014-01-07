@@ -76,13 +76,13 @@ switch (ENVIRONMENT) {
  *
  */
 function core_exception_handler (Exception $exception) {
-	$msg = "<div style='border: 1px solid black; padding: 10px; margin: 25px;'>";
+	$msg = "<div style='border: 1px solid black; padding: 10px; margin: 25px; font-family: Courier; font-size: 12px;'>";
 	$msg .= "<span><strong style='text-decoration: underline;'>Exception</strong></span>";
-	$msg .= '<pre><strong style=\'color: red; \'>Message</strong>: <strong>'.$exception->getMessage().'</strong><br/>';
+	$msg .= '<p><strong style=\'color: red; \'>Message</strong>: <strong>'.$exception->getMessage().'</strong><br/>';
 	$msg .= 'Code: '.$exception->getCode().'<br/>';
 	$msg .= 'File: '.$exception->getFile().'<br/>';
 	$msg .= 'Line: '.$exception->getLine().'<br/>';
-	$msg .= '</pre>';
+	$msg .= '</p>';
 	$msg .= '</div>';
 	echo $msg;
 }
@@ -105,19 +105,19 @@ function core_error_handler ($errno, $errstr, $errfile, $errline) {
 		case E_NOTICE : $error_name = 'Notice'; break;
 
 		// Hide errors
-		default : $showError = false; break;
+		default : $showError = true; $error_name = 'Error'; break;
 
 	}
 	if (!$showError) {
 		return true;
 	}
-	$msg = "<div style='border: 3px solid red; padding: 10px; margin: 25px;'>";
+	$msg = "<div style='border: 3px solid red; padding: 10px; margin: 25px; font-family: Courier; font-size: 12px;'>";
 	$msg .= "<span><strong style='text-decoration: underline;'>Error</strong></span>";
-	$msg .= '<pre><strong style=\'color: red; \'>Message</strong>: <strong>'.$errstr.'</strong><br/>';
+	$msg .= '<p><strong style=\'color: red; \'>Message</strong>: <strong>'.$errstr.'</strong><br/>';
 	$msg .= 'Name: '.$error_name.'<br/>';
 	$msg .= 'File: '.$errfile.'<br/>';
 	$msg .= 'Line: '.$errline.'<br/>';
-	$msg .= '</pre>';
+	$msg .= '</p>';
 	$msg .= '</div>';
 	echo $msg;
 }
