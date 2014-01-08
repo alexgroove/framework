@@ -166,6 +166,63 @@ example: $this->view->bind('Products', Product::all()); will make:
 
 
 
+-------------------------------
+--- How to create a Model ? ---
+-------------------------------
+
+1- Create the SQL table format in Migrations/
+example: Products table
+
+-- Migrations/products.sql
+
+/*************************
+** Products Table
+*************************/
+drop table if exists products;
+create table products (
+	id int not null auto_increment primary key,
+	category_id int,
+	name varchar(100),
+	price float,
+	description text
+);
+
+
+2- Run the content of this file in your database. Generally throught PHPMyAdmin.
+
+3- Create a Model file in App/Models/. All models MUST implements the TABLE_NAME constant and the validate function. Also all properties MUST be the same as the SQL schema (same name also).
+example: Product Model
+
+-- App/Models/Product.php
+
+<?php
+
+namespace App\Models;
+use Framework\Components\Model\Model;
+
+defined('CORE_EXEC') or die('Restricted Access');
+
+
+class Product extends Model {
+	
+	const TABLE_NAME = 'products';
+
+	public $id;
+	public $category_id;
+	public $name;
+	public $price;
+	public $description;
+
+
+	public function validate () {
+		return true;
+	}
+}
+
+
+
+4- Use the namespace of your new Model in the Controller that use it.
+example: use App\Models\Product;
 
 
 
@@ -205,9 +262,9 @@ example: $this->view->set('css-styling', 'bootstrap'); - changing css style on t
 example: ProductsController::create => public static function create () {}
 
 11- For more control over the response sent by the framework, use the controller response object.
-example: echo $this->view->render('App/Views/Main/index');
-becomes: $content = $this->view->render('App/Views/Main/index');
-				 return $this->response->send($content);
+see the App/Controllers/MainController::index for example
+
+12- Do not put the ending php tag '?>' at the end of your php file. ZEND recommandation for speeding php script.
 					
 
 

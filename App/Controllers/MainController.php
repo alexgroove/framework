@@ -45,10 +45,10 @@ class MainController extends SecureController {
 		// Use setContent to add the content to your response
 		$this->response->setContent($content);
 
-		// Use setContentType to set the content type of your response.
+		// Use setContentType to set the content type of your response. Optional
 		$this->response->setContentType('text/html');
 
-		// Use setCaching to activate the HTTP caching in seconds on the client browser. 
+		// Use setCaching to activate the HTTP caching in seconds on the client browser. Optional
 		$this->response->setCaching(10);
 
 		// Send the respone

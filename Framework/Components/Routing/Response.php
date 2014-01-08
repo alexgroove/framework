@@ -134,11 +134,16 @@ class Response implements IResponse {
 		if (headers_sent()) {
 			throw new HeadersAlreadySentException();
 		}
-		header('HTTP/1.0 '. $this->http_code);
+		header('HTTP/1.1 '. $this->http_code);
 		header('Content-type: '.$this->content_type);
+    header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
 		if ($this->http_caching > 0 && ENVIRONMENT != DEVELOPMENT) {
-	    header("Pragma: public");
-	    header('Cache-Control: max-age='.$this->http_caching);
+	    header('Pragma: public, cache');
+	    header('Cache-Control: no-transform, public, max-age='.$this->http_caching);
+	    header('Last-Modified: '.gmdate('D, d M Y H:i:s \G\M\T', time() - 2592000));
+	  } else {
+	  	header('Pragma: no-cache');
+	  	header('Cache-Control: max-age=0, private, no-cache, no-store, must-revalidate');
 	  }
 		echo empty($content) ? $this->content : $content;
 		return true;
