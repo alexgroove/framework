@@ -35,6 +35,9 @@ abstract class Model implements IModel {
 	 *
 	 */
 	public function __construct ($id_or_array=array()) {
+		if (!defined('static::TABLE_NAME')) {
+			throw new MissingTableNameException();
+		}		
 		$model = self::get_child_model();
 		$inputs = is_array($id_or_array) ? $id_or_array : $model::find($id_or_array);
 		foreach($inputs as $key => $value) {

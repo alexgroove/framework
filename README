@@ -166,6 +166,29 @@ example: $this->view->bind('Products', Product::all()); will make:
 </Products>
 
 
+Here a comparaison of looping products list in PHP and in XSLT, you'll see that the difference is not to hard to understand.
+
+-- PHP
+<?php 
+foreach($products as $product) {
+	echo "<div id='{$product['id']}'>";
+	echo '<p>'.$product['name'].'</p>';
+	echo '<p>'.$product['price'].'</p>';
+	echo '</div>';
+}
+?>
+
+
+-- XSLT
+<xsl:for-each select="//Products/Product">
+	<div id="{id}">
+		<p><xsl:value-of select="name"/></p>
+		<p><xsl:value-of select="price"/></p>
+	</div>
+</xsl:for-each>
+
+The real good advantage of XSL is that the language is already an XML format.
+
 
 
 -------------------------------
@@ -268,7 +291,7 @@ see the App/Controllers/MainController::index for example
 
 12- Do not put the ending php tag '?>' at the end of your php file. ZEND recommandation for speeding php script.
 					
-
+13- If you absolutly need to pass raw html in the view, use $this->view->set('param_name', '<p>my raw HTML</p>'); And in the XSL template, you <xsl:value-of disable-output-escaping='yes' select="$param_name"/> to output as HTML.
 
 
 

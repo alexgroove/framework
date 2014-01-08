@@ -18,8 +18,8 @@
  * Check php version MUST by equal or higher that 5.4.4
  *
  */
-if (version_compare(phpversion(), '5.4.4', '<')) {
-	die('Your PHP version on your server is not high enough, 5.4.4 is required');
+if (version_compare(phpversion(), '5.3.0', '<')) {
+	die('Your PHP version on your server is not high enough, 5.3.0 is required');
 }
 
 
@@ -30,7 +30,7 @@ if (version_compare(phpversion(), '5.4.4', '<')) {
  * It also generate a secure id that can be use.
  *
  */
-define('CORE_EXEC', hash('sha256', uniqid(rand(), true)));
+define('CORE_EXEC', hash('sha256', 'YOUR APP SECRET'));
 
 
 /**
