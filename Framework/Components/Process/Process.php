@@ -6,7 +6,6 @@ use Framework\Components\Process\Exceptions\ControllerFileNotFoundException;
 use Framework\Components\Process\Exceptions\ControllerClassNotFoundException;
 use Framework\Components\Process\Exceptions\ControllerMethodNotFoundException;
 
-
 defined('CORE_EXEC') or die('Restricted Access');
 
 

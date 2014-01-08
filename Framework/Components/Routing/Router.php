@@ -6,7 +6,6 @@ use Framework\Components\Process\Process;
 use Framework\Components\Routing\Exceptions\NoMatchingRouteException;
 use Framework\Components\Routing\Exceptions\TooManyRoutesException;
 
-
 defined('CORE_EXEC') or die('Restricted Access');
 
 

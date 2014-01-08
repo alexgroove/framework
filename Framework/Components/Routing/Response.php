@@ -55,6 +55,15 @@ class Response implements IResponse {
 	 *
 	 */
 	private $http_caching;
+
+
+	/**
+	 *
+	 * @var $filename
+	 * @access private
+	 *
+	 */
+	private $filename;
 	
 
 	/**
@@ -125,9 +134,23 @@ class Response implements IResponse {
 
 	/**
 	 *		
+	 * - setFilename
+	 * Use this function when you are sending an image or other downloadable file type.
+	 * @access public
+	 * @param (int) $http_caching - number of second you want the browser to cache the response
+	 *		
+	 */
+	public function setFilename ($filename) {
+		$this->filename = $filename;
+	}
+
+
+	/**
+	 *		
 	 * - send		
 	 * @access public
 	 * @param $content (optional) - use to faster sending content.
+	 * @return true
 	 *		
 	 */
 	public function send ($content='') {
@@ -137,6 +160,9 @@ class Response implements IResponse {
 		header('HTTP/1.1 '. $this->http_code);
 		header('Content-Type: '.$this->content_type);
     header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
+		if (isset($this->filename)) {
+			header('Content-Disposition: inline; filename="'.$this->filename.'"');
+		}    
 		if ($this->http_caching > 0 && ENVIRONMENT != DEVELOPMENT) {
 	    header('Pragma: public, cache');
 	    header('Cache-Control: no-transform, public, max-age='.$this->http_caching);

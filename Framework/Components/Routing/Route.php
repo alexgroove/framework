@@ -3,7 +3,6 @@
 namespace Framework\Components\Routing;
 use Framework\Components\Model\Model;
 
-
 defined('CORE_EXEC') or die('Restricted Access');
 
 

@@ -6,7 +6,6 @@ use Framework\Components\Controller\Exceptions\HeadersAlreadySentException;
 use Framework\Components\View\View;
 use Framework\Components\Routing\Response;
 
-
 defined('CORE_EXEC') or die('Restrcited Access');
 
 
