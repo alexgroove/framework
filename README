@@ -36,9 +36,18 @@ Sections
 ######################################################################
 
 1- Install the framework folder on your server
+
 2- Create the database in MySQL for your project
+
 3- Change the database credentials in config.php
+example: 
+define('HOST', 'localhost');
+define('USER', 'root');
+define('PASSWORD', 'root');
+define('DATABASE', 'MY_DATABASE_NAME');
+
 4- Run http://localhost{PORT_NUMBER}/{PATH_TO_APP}/.update-routes.php in your browser
+
 5- Go to http://localhost{PORT_NUMBER}/{PATH_TO_APP}/ to see the main page
 
 
