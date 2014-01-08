@@ -75,7 +75,7 @@ This line prevent loading independent file with passing by the index.php
 ######################################################################
 
 When deploying the framework in production mode
-1- Set the ENVIRONMENT global in config.php to 'production'.
+1- Set the ENVIRONMENT global in config.php to PRODUCTION.
 2- REMOVE Migrations folder, because it contains all your database architecture and all the routes of your framework, and you dont wnat that to be visible.
 3- REMOVE .update-routes.php
 
@@ -107,6 +107,7 @@ example: new.xsl and edit.xsl are two partials that use the same form
 5- The App/Views/Templates/app_template.xsl file is the default template and container of your app. But there is nothing mandatory about this file and feel free to modify it. It is also where you will put all your CSS and JavaScript dependencies. The only IMPORTANT thing is that the content must go in the XML_PARTIAL_CONTAINER. 
 example: if you want to divise your app with an admin section, you could create a template file call App/Views/Templates/admin_template.xsl and extends your views with that template.
 
+6- Views file use the XSLT programming language version 1.0, as a recommandation of the W3. Be sure to try to get confortable with it and XPath expression to get the content from the XML data that you will pass in the view throught the View::bind method.
 
 
 
@@ -125,18 +126,19 @@ example: The app comes with a default SecureController in the App/Components/ fo
 
 
 
+
 -------------------------------------------------------------------
 --- Can multiple routes map to the same controller and action ? ---
 -------------------------------------------------------------------
 Yes, just add the routes in Migrations/route.sql
 example: 
 	-- index mapping
-	('GET', '', 'MainController', 'index'),
-	('GET', 'index', 'MainController', 'index'),
+	('GET', '',           'MainController', 'index'),
+	('GET', 'index',      'MainController', 'index'),
 	('GET', 'index.html', 'MainController', 'index'),
-	('GET', 'index.php', 'MainController', 'index')
+	('GET', 'index.php',  'MainController', 'index')
 
-In this example, three different routes maps to MainController::index
+In this example, four different routes maps to MainController::index
 
 
 

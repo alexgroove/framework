@@ -3,7 +3,7 @@
 defined('CORE_EXEC') or die('Restricted Access');
 
 
-/** 
+/**
  *
  * Core Framework
  * - utils.php
@@ -202,3 +202,17 @@ function get_class_name ($class, $namespace='') {
 }
 
 
+
+/**
+ *
+ * - is_associative_array 
+ * Method that check if an array is the format associative
+ * @static
+ * @access private
+ * @param (array) $arr
+ * @return (bool)
+ *
+ */
+function is_associative_array ($arr) {
+	return array_keys($arr) !== range(0, count($arr) - 1);
+}

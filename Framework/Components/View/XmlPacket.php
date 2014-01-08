@@ -63,7 +63,7 @@ class XmlPacket implements IXmlPacket {
 				$result = ArrayToXml::createXml($this->nodeName, array('@value'=>$this->data));
 				break;
 			// If data is an array of array
-			case !self::isAssociativeArray($this->data) ? true : false:
+			case !is_associative_array($this->data) ? true : false:
 				$model_name = singular($this->nodeName);
 				// $model_name = rtrim($this->nodeName, 's'); // Trimming 's', example: shops => shop
 				$acc = array($model_name => array());
@@ -73,7 +73,7 @@ class XmlPacket implements IXmlPacket {
 				$result = ArrayToXml::createXml($this->nodeName, $acc);
 				break;
 			// If data is an associative array
-			case self::isAssociativeArray($this->data): 
+			case is_associative_array($this->data): 
 				$result = ArrayToXml::createXml($this->nodeName, $this->data);
 				break;
 			default : 
@@ -81,21 +81,6 @@ class XmlPacket implements IXmlPacket {
 				break;
 		}
 		return $result->documentElement;
-	}
-
-
-	/**
-	 *
-	 * - isAssociativeArray 
-	 * Method that check if an array is the format associative
-	 * @static
-	 * @access private
-	 * @param (array) $arr
-	 * @return (bool)
-	 *
-	 */
-	private static function isAssociativeArray ($arr) {
-		return array_keys($arr) !== range(0, count($arr) - 1);
 	}
 }
 

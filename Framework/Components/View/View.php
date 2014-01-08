@@ -3,6 +3,8 @@
 namespace Framework\Components\View;
 use Framework\Components\View\Interfaces\IView;
 use Framework\Components\View\Exceptions\NoStylesheetFoundException;
+use Framework\Components\View\Exceptions\WrongDataFormatException;
+use Framework\Components\View\Exceptions\CannotBindDataWithNoNameException;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -76,7 +78,13 @@ class View implements IView {
 	 * @param (mixed) $data
 	 *
 	 */
-	public function bind ($name, $data=array()) {
+	public function bind ($name='', $data=array()) {
+		if (!is_string($name) || empty($name)) {
+			throw new CannotBindDataWithNoNameException();
+		}
+		if (!is_array($data)) {
+			throw new WrongDataFormatException();
+		}
 		$this->package->add($name, (array)$data);
 	}
 

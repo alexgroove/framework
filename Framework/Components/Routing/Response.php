@@ -135,7 +135,7 @@ class Response implements IResponse {
 			throw new HeadersAlreadySentException();
 		}
 		header('HTTP/1.1 '. $this->http_code);
-		header('Content-type: '.$this->content_type);
+		header('Content-Type: '.$this->content_type);
     header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
 		if ($this->http_caching > 0 && ENVIRONMENT != DEVELOPMENT) {
 	    header('Pragma: public, cache');

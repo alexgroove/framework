@@ -81,7 +81,7 @@ switch (ENVIRONMENT) {
  *
  */
 function core_exception_handler (Exception $exception) {
-	$msg = "<div style='border: 1px solid black; padding: 10px; margin: 25px; font-family: Courier; font-size: 12px;'>";
+	$msg = "<div style='border: 3px double black; padding: 10px; margin: 25px; font-family: Courier; font-size: 12px;'>";
 	$msg .= "<span><strong style='text-decoration: underline;'>Exception</strong></span>";
 	$msg .= '<p><strong style=\'color: red; \'>Message</strong>: <strong>'.$exception->getMessage().'</strong><br/>';
 	$msg .= 'Code: '.$exception->getCode().'<br/>';
