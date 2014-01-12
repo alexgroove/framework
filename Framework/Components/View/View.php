@@ -108,10 +108,12 @@ class View implements IView {
 			throw new NoStylesheetFoundException ($stylesheet_path);
 		}
 		$this->processor->importStylesheet(simplexml_load_file($stylesheet_path));
-		if ($result = $this->processor->transformToXml(simplexml_load_string($this->package->compressToXml())))
+		if ($result = $this->processor->transformToXml(simplexml_load_string($this->package->compressToXml()))) {
 			return $result;
-		else
+		}
+		else {
 			pprint(libxml_get_errors());
+		}
 	}
 }
 

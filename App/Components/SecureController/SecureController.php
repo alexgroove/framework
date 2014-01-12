@@ -87,20 +87,6 @@ abstract class SecureController extends Controller implements ISecureController 
 			throw new ForbiddenSectionException();
 		}
 		parent::__construct();
-
-		// View extra parameters
-		if (isset($this->view)) {
-			
-			// Set flash message if it is set
-			if (isset($_GET['flash'])) {
-				$this->view->set('flash', $_GET['flash']);
-			}
-		}
-
-		// Response settings
-		if (isset($this->response)) {
-			$this->response->setContentType('text/html');
-		}
 	}
 
 

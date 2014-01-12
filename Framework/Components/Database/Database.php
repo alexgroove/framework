@@ -206,11 +206,7 @@ class Database implements IDatabase {
 		}
 		$acc_set = rtrim($acc_set, ',');
 		$query_str = "UPDATE $table_name SET $acc_set WHERE id = $id";
-		$nblignes = self::$instance->exec($query_str);
-		if ($nblignes != 1) {
-			throw new QueryErrorException(__METHOD__, self::$instance->errorInfo());
-		}		
-		return true;
+		return self::$instance->exec($query_str);
 	}
 
 
