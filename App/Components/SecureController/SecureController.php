@@ -5,6 +5,7 @@ use Framework\Components\Controller\Controller;
 use Framework\Components\Session\Session;
 use App\Components\SecureController\Interfaces\ISecureController;
 use App\Components\SecureController\Exceptions\ForbiddenSectionException;
+use App\Components\SecureController\Exceptions\SecurityBreachException;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -87,6 +88,14 @@ abstract class SecureController extends Controller implements ISecureController 
 			throw new ForbiddenSectionException();
 		}
 		parent::__construct();
+		if (isset($this->view)) {
+			$this->view->set('SECURE_KEY', CORE_EXEC);
+		}
+		if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+			if (!isset($_POST['secure_key']) || $_POST['secure_key'] != CORE_EXEC) {
+				throw new SecurityBreachException();
+			}
+		}
 	}
 
 

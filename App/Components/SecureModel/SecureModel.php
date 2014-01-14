@@ -36,15 +36,10 @@ abstract class SecureModel extends Model implements ISecureModel {
 			throw new MissingSecureFieldsException(self::get_child_model());
 		}
 		$secure_fields = explode(',', static::SECURE_FIELDS);
-		$search_fields = array();
-		foreach($secure_fields as $field) {
-			$this->$field = hash('sha256', $this->$field);
-			$search_fields[$field] = $this->$field;
-		}
-
-		// Check if the secure fields combinaison is unique in the model table.
-		if (count(self::find($search_fields)) != 0) {
-			return false;
+		foreach($this as $key => $value) {
+			if (in_array($key, $secure_fields)) {
+				$this->$key = hash('sha256', $value);
+			}
 		}
 		return parent::save();
 	}

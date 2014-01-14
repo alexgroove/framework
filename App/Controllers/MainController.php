@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-use App\Components\SecureController\SecureController;
+use App\Components\AppController\AppController;
 
 // File security
 defined('CORE_EXEC') or die('Restricted Access');
@@ -14,7 +14,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @author Your name
  *
  */
-class MainController extends SecureController {
+class MainController extends AppController {
 
 
 	/**
@@ -23,7 +23,7 @@ class MainController extends SecureController {
 	 * Use this constant to set the needed priviledge level for the controller
 	 *
 	 */
-	const PRIVILEDGE_LEVEL = SecureController::VISITOR;
+	const PRIVILEDGE_LEVEL = self::VISITOR;
 
 
 	/**

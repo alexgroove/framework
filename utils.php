@@ -202,7 +202,6 @@ function get_class_name ($class, $namespace='') {
 }
 
 
-
 /**
  *
  * - is_associative_array 
@@ -215,4 +214,17 @@ function get_class_name ($class, $namespace='') {
  */
 function is_associative_array ($arr) {
 	return array_keys($arr) !== range(0, count($arr) - 1);
+}
+
+
+/**
+ *
+ * -seo_url_fix
+ * This function replace the space by dash and put the first word with a uppercase.
+ * @param (string) $str
+ * @return (string)
+ *
+ */
+function seo_url_fix ($str) {
+	return ucfirst(preg_replace('/\s+/', '-', $str));
 }
