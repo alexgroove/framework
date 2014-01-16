@@ -72,15 +72,19 @@ class Session implements ISession {
 	 */
 	public static function read ($object) {
 		$acc = array();
+
 		$object = self::fixDot($object);
+		// pprint($object);
 		foreach($_SESSION as $key => $value) {
 			if (preg_match("/$object/", self::fixDot($key)) ? true : false) {
 				$acc[ltrim($key, '.'.$object)] = $value;
 			}
 		}
+		// pprint($acc);
 		switch(count($acc)) {
 			case 0 : return null;
 			case 1 : return reset($acc); current($acc);
+
 			default : return $acc;
 		}
 	}
@@ -95,8 +99,11 @@ class Session implements ISession {
 	 *
 	 */
 	public static function delete ($key) {
-		if (isset($_SESSION[$key])) {
-			unset($_SESSION[$key]);
+		$acc = array();
+		foreach($_SESSION as $k => $v) {
+			if (preg_match("/^$key/", $k) ? true : false) {
+				unset($_SESSION[$k]);
+			}
 		}
 	}
 

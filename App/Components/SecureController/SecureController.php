@@ -108,7 +108,6 @@ abstract class SecureController extends Controller implements ISecureController 
 	 *
 	 */
 	protected static function activate_secure_session ($priviledge_level) {
-		Session::reset();
 		Session::write('SESSION_PRIVILEDGE_LEVEL', $priviledge_level);
 	}
 

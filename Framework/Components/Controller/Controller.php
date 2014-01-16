@@ -56,14 +56,15 @@ abstract class Controller implements IController  {
 	 *
 	 */
 	public function __construct () { 
+		
+		// Response initial setup
+		$this->response = new Response ();
+
 		if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 			// View inital setup
 			$this->view = new View();
 			$this->view->set('HTTP_LOCATION', location());
-
-			// Response initial setup
-			$this->response = new Response ();
 		}
 	}
 
