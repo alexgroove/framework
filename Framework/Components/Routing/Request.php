@@ -23,7 +23,7 @@ class Request implements IRequest {
 	 * This constant is the regular expression that replace the :string route wildcard
 	 *
 	 */
-	const DASH_STRING_URL_REGEX = '/\/[A-Z]([a-zA-Z]*-?[a-zA-Z]*)*\/?/';
+	const DASH_STRING_URL_REGEX = '/\/[A-Z]([a-zA-Z0-9]*-?[a-zA-Z0-9]*)*\/?/';
 
 
 	/**
