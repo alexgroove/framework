@@ -226,5 +226,5 @@ function is_associative_array ($arr) {
  *
  */
 function seo_url_fix ($str) {
-	return ucfirst(preg_replace('/\s+/', '-', $str));
+	return strtr(ucfirst(preg_replace('/\s+/', '-', $str)), array('é'=>'e', 'è'=>'e'));
 }
