@@ -138,6 +138,9 @@ function prefix_array ($array=array(), $prefix='prefix') {
  *
  */
 function plural ($str='') {
+	if (substr($str, -2) == 'ss') {
+		return $str.'es';
+	}
 	switch (substr($str, -1)) {
 		case 'y': return substr($str, 0, -1).'ies';
 		case 's': return $str;
