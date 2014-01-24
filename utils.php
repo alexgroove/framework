@@ -158,6 +158,9 @@ function plural ($str='') {
  *
  */
 function singular ($str='') {
+	if (substr($str, -4) == 'sses') {
+		return substr($str, 0, -2);
+	}
 	if (substr($str, -3) == 'ies') {
 		return substr($str, 0, -3).'y';
 	} else {
