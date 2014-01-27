@@ -149,6 +149,16 @@ abstract class Model implements IModel {
   }
 
 
+  /**
+   *
+   * toString magic method
+   *
+   */
+  public function __toString () {
+  	pprint($this); return '';
+  }
+
+
 	/**
 	 *
 	 * - save
@@ -167,8 +177,7 @@ abstract class Model implements IModel {
 			}
 		}
 		if ($this->validate()) {
-			(empty($this->id)) ? self::create($inputs) : self::update($this->id, $inputs);
-			return true;
+			return (empty($this->id)) ? self::create($inputs) : self::update($this->id, $inputs);
 		}
 		return false;
 	}

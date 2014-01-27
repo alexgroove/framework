@@ -22,8 +22,8 @@ class FlashMessenger implements IFlashMessenger {
 
 
 	const WARNING = 'warning';
-	const INFO = 'info';
-	const ERROR = 'error';
+	const INFO    = 'info';
+	const ERROR   = 'error';
 	const SUCCESS = 'success';
 
 
@@ -64,11 +64,24 @@ class FlashMessenger implements IFlashMessenger {
 	 *
 	 */
 	public function getMessage () {
-		$result = Session::read('FLASH');
+		$result = Session::read('FLASH.message');
 		self::remove_flash();
 		return $result;
 	}
 
+
+	/**
+	 *
+	 * - getType
+	 * This function fetch the type of the flash message
+	 * @access public
+	 * @return (string) 
+	 *
+	 */
+	 public function getType () {
+		return Session::read('FLASH.type');
+	}
+	
 
 	/**
 	 *

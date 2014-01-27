@@ -19,7 +19,7 @@ defined('CORE_EXEC') or die('Restricted Access');
  * @author Alexandre Pagé
  *
  */
-class AppController extends SecureController implements IAppController {
+abstract class AppController extends SecureController implements IAppController {
 
 
 	/**
@@ -44,10 +44,8 @@ class AppController extends SecureController implements IAppController {
 		$this->flash = new FlashMessenger();
 		if (isset($this->view)) {
 			$this->view->set('SESSION_PRIVILEDGE', Session::read('SESSION_PRIVILEDGE_LEVEL'));
-			$this->view->set('USER_NAME', Session::read('USER.name'));
-			$this->view->set('USER_ID', Session::read('USER.id'));
-			$this->view->set('USER_PROFILE_URL', Session::read('USER.id').'/'.seo_url_fix(Session::read('USER.name')));
-			$this->view->bind('flash', $this->flash->getMessage());
+			$this->view->set('FLASH_TYPE', $this->flash->getType());
+			$this->view->set('FLASH_MESSAGE', $this->flash->getMessage());
 		}
 
 	}

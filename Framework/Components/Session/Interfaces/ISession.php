@@ -25,7 +25,7 @@ interface ISession {
 
 	public static function close ();
 
-	public static function exist ($key);
+	public static function exists ($key);
 
 	public static function reset ();
 

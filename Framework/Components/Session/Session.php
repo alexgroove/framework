@@ -92,6 +92,24 @@ class Session implements ISession {
 
 	/**
 	 *
+	 * - get_once
+	 * This function return the result from a key and remove it from the session
+	 * @param (string) $key
+	 * @return (mixed) result or false
+	 *
+	 */
+	public static function get_once ($key) {
+		if (self::exists($key)) {
+			$result = self::read($key);
+			self::delete($key);
+			return $result;
+		}
+		return false;
+	}
+
+
+	/**
+	 *
 	 * - delete
 	 * @static
 	 * @access public
@@ -123,14 +141,14 @@ class Session implements ISession {
 
 	/**
 	 *
-	 * - exist
+	 * - exists
 	 * @static 
 	 * @access public
 	 * @param (string) $key
-	 * @return (bool) - if the key exist in the $_SESSION
+	 * @return (bool) - if the key exists in the $_SESSION
 	 *
 	 */
-	public static function exist ($key) {
+	public static function exists ($key) {
 		return isset($_SESSION[$key]);
 	}
 

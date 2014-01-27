@@ -81,7 +81,7 @@ abstract class SecureController extends Controller implements ISecureController 
 	 *
 	 */
 	public function __construct () {
-		if (!Session::exist('SESSION_PRIVILEDGE_LEVEL')) {
+		if (!Session::exists('SESSION_PRIVILEDGE_LEVEL')) {
 			Session::write('SESSION_PRIVILEDGE_LEVEL', self::VISITOR);
 		}
 		if (Session::read('SESSION_PRIVILEDGE_LEVEL') > static::PRIVILEDGE_LEVEL) {
