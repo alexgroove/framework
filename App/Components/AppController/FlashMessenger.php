@@ -35,7 +35,7 @@ class FlashMessenger implements IFlashMessenger {
 	 *
 	 */
 	public function __construct () {
-		if (!Session::exist('FLASH.message')) {
+		if (!Session::exists('FLASH.message')) {
 			Session::write('FLASH.type', '');
 			Session::write('FLASH.message', '');
 		}
