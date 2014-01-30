@@ -5,6 +5,7 @@ use Framework\Components\View\Interfaces\IView;
 use Framework\Components\View\Exceptions\NoStylesheetFoundException;
 use Framework\Components\View\Exceptions\WrongDataFormatException;
 use Framework\Components\View\Exceptions\CannotBindDataWithNoNameException;
+use Framework\Components\Model\Model;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -74,7 +75,7 @@ class View implements IView {
 		if (!is_string($name) || empty($name)) {
 			throw new CannotBindDataWithNoNameException();
 		}
-		$this->package->add($name, (array)$data);
+		$this->package->add($name, self::prepare($data));
 	}
 
 
@@ -115,5 +116,32 @@ class View implements IView {
 			pprint(libxml_get_errors());
 		}
 	}
+
+
+	private static function prepare ($object) {
+		if ($object instanceof Model) {
+			$acc = array();
+			foreach($object as $key => $value) {
+				if (!is_callable($value)) {
+					$acc[$key] = $value;
+				}
+			}
+			return $acc;
+		}
+		return (array)$object;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
