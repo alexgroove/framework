@@ -16,8 +16,6 @@ insert into routes (method, route, controller, action) values
 
 	-- index mapping
 	('GET', '',           'MainController', 'index'),
-	('GET', 'index',      'MainController', 'index'),
-	('GET', 'index.html', 'MainController', 'index'),
-	('GET', 'index.php',  'MainController', 'index')
+	('GET', 'index',      'MainController', 'index')
 
 ;

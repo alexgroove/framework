@@ -46,6 +46,15 @@ class Request implements IRequest {
 
 	/**
 	 *
+	 * @constant EXTENSION_REGEX
+	 * This constant is the regular expression that replace the :id route wildcard
+	 *
+	 */	
+	const EXTENSION_REGEX = '/.html|.htm|.php/';
+
+
+	/**
+	 *
 	 * @var $method
 	 * @access public
 	 *
@@ -82,6 +91,7 @@ class Request implements IRequest {
 			$this->request = rtrim($_GET['mvc'], '/'); 
 		}
 		$params = (isset($_GET['mvc'])) ? explode('/', rtrim($_GET['mvc'], '/')) : array('index');
+		$params[count($params)-1] = preg_replace(self::EXTENSION_REGEX, '', $params[count($params)-1]);
 		foreach($params as $param) {
 			// Accumulate params when the value is numeric
 			// Need to change that behavior to accept text parameter
@@ -107,6 +117,7 @@ class Request implements IRequest {
 	public function getGenericRequest () {
 		$result = preg_replace(self::NUMERIC_PARAM, "/:id/", $this->request);
 		$result = preg_replace(self::DASH_STRING_URL_REGEX, '/:string/', $result);
+		$result = preg_replace(self::EXTENSION_REGEX, '', $result);
 		return rtrim($result, '/');
 	}
 }
