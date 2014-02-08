@@ -120,6 +120,19 @@ class Database implements IDatabase {
 	}
 
 
+	public static function select_like ($table_name, $property, $like_str) {
+		$query = "SELECT * FROM $table_name WHERE $property LIKE CONCAT('%', '$like_str', '%')";
+		$statement = self::$instance->prepare($query);
+		if (!$statement) {
+			throw new QueryErrorException(__METHOD__, self::$instance->errorInfo());
+		}		
+		$statement->execute();
+		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+		$statement->closeCursor();
+		return $result;
+	}
+
+
 	/**
 	 *
 	 * - select_where
@@ -268,6 +281,8 @@ class Database implements IDatabase {
 		return self::$instance->exec($query);
 	}
 
+
+	
 
 	/**
 	 *
