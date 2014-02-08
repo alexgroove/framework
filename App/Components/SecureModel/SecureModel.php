@@ -31,7 +31,7 @@ abstract class SecureModel extends Model implements ISecureModel {
 	 * @return (bool) - Model::save method or more than one secure fields in database
 	 *
 	 */
-	public function save () {
+	public function secure_save () {
 		if (!defined('static::SECURE_FIELDS')) {
 			throw new MissingSecureFieldsException(self::get_child_model());
 		}
