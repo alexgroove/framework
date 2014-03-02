@@ -5,6 +5,7 @@ use Framework\Components\Process\Interfaces\IProcess;
 use Framework\Components\Process\Exceptions\ControllerFileNotFoundException;
 use Framework\Components\Process\Exceptions\ControllerClassNotFoundException;
 use Framework\Components\Process\Exceptions\ControllerMethodNotFoundException;
+use Framework\Components\Session\Session;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -49,6 +50,10 @@ class Process implements IProcess {
 	public function __construct ($route, $request) {
 		$this->route = $route;
 		$this->request = $request;
+
+		// Save route and request in the session for further usage
+		Session::write('ROUTE', $this->route);
+		Session::write('REQUEST', $this->request);
 	}
 
 

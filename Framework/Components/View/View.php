@@ -6,6 +6,7 @@ use Framework\Components\View\Exceptions\NoStylesheetFoundException;
 use Framework\Components\View\Exceptions\WrongDataFormatException;
 use Framework\Components\View\Exceptions\CannotBindDataWithNoNameException;
 use Framework\Components\Model\Model;
+use Framework\Components\Session\Session;
 
 defined('CORE_EXEC') or die('Restricted Access');
 
@@ -99,11 +100,21 @@ class View implements IView {
 	 * - render
 	 * Caching can only take place in production ENVIRONMENT
 	 * @access public
-	 * @param (string) $path - path to view stylesheet (without extension)
+	 * @param (string or nothing) $path - path to view stylesheet (without extension)
 	 * @return (string) - transformation result
 	 *
 	 */
-	public function render ($path) {
+	public function render ($path='') {
+		/**
+		 * If not path is given, the default is to take the name of the called controller
+		 * as the Views Folder and the name of the action for the stylesheet
+		 */
+		if (empty($path)) {
+			$route = Session::read('ROUTE');
+			$controller = $route['controller'];
+			$action = $route['action'];
+			$path = 'App/Views/'.$controller.'/'.$action;
+		}
 		$stylesheet_path = $path.self::TEMPLATE_EXTENSION;
 		if (!file_exists($stylesheet_path)) {
 			throw new NoStylesheetFoundException ($stylesheet_path);
@@ -113,11 +124,23 @@ class View implements IView {
 			return $result;
 		}
 		else {
+			// Should fine a better way to show the xml errors.
 			pprint(libxml_get_errors());
 		}
 	}
 
 
+	/**
+	 *
+	 * - prepare
+	 * @static
+	 * @access private
+	 * @param (object) - $object
+	 * @return (array)
+	 * This method is a fix when passing a Model object that has HAS_MANY or 
+	 * HAS_ONE constant activated. Because it creates properties that are functions.
+	 *
+	 */
 	private static function prepare ($object) {
 		if ($object instanceof Model) {
 			$acc = array();

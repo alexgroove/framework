@@ -56,7 +56,7 @@ abstract class Controller implements IController  {
 	 *
 	 */
 	public function __construct () { 
-		
+
 		// Response initial setup
 		$this->response = new Response ();
 
